@@ -1,0 +1,1 @@
+/Users/admin/.config/lvim/config.lua
