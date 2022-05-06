@@ -23,7 +23,7 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = false
+lvim.format_on_save = true
 lvim.colorscheme = "material"
 lvim.builtin.dap.active = true
 lvim.transparent_window = true
@@ -183,20 +183,20 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
 --   { command = "black", filetypes = { "python" } },
 --   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--print-with", "100", '--config-precedence', 'prefer-file' },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -225,6 +225,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 --     },
 -- }
 lvim.plugins = {
+  -- Requires Nvim 0.7
+  -- { 'bennypowers/nvim-regexplainer',
+  --     config = function() require'regexplainer'.setup() end,
+  --     requires = {
+  --       'nvim-treesitter/nvim-treesitter',
+  --       'MunifTanjim/nui.nvim',
+  --     } },
   {'iamcco/markdown-preview.nvim', run = "cd app && yarn"},
   {'unblevable/quick-scope', config = function()
     vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
@@ -233,50 +240,49 @@ lvim.plugins = {
       highlight QuickScopeSecondary guifg=#ABFAFA guibg=NONE gui=underline ctermbg=133 cterm=underline
     ]]
   end},
-    {'simrat39/symbols-outline.nvim'},
-    {"folke/tokyonight.nvim"},
-    {'wellle/targets.vim'},
-    {'luochen1990/rainbow', config = function ()
-      vim.g.rainbow_active = 1
-    end},
-    {'gelguy/wilder.nvim', config = function()
-        -- vim.cmd[[call wilder#setup({'modes': [':', '/', '?']})]]
-    end},
-    {'jwalton512/vim-blade'},
-    -- {'hzchirs/vim-material', config = function ()
-    --   vim.g.material_style = 'dark'
-    -- end},
-    {'voldikss/vim-floaterm', config = function ()
-    end, setup = {
-      vim.cmd("let g:floaterm_wintype = 'split'")
-    }},
-    {'metakirby5/codi.vim'},
-   { "tpope/vim-surround", ['keys'] = {"c", "d", "y"} },
+  {'simrat39/symbols-outline.nvim'},
+  {"folke/tokyonight.nvim"},
+  {'wellle/targets.vim'},
+  {'luochen1990/rainbow', config = function ()
+    vim.g.rainbow_active = 1
+  end},
+  {'gelguy/wilder.nvim', config = function()
+      -- vim.cmd[[call wilder#setup({'modes': [':', '/', '?']})]]
+  end},
+  {'jwalton512/vim-blade'},
+  -- {'hzchirs/vim-material', config = function ()
+  --   vim.g.material_style = 'dark'
+  -- end},
+  {'voldikss/vim-floaterm', config = function ()
+  end, setup = {
+    vim.cmd("let g:floaterm_wintype = 'split'")
+  }},
+  {'metakirby5/codi.vim'},
+  { "tpope/vim-surround", ['keys'] = {"c", "d", "y"} },
   {'mattn/emmet-vim'},
+  {'junegunn/fzf', config = function()
+    local fz = {}
+    fz['ctrl-t'] = 'tab split'
+    fz['ctrl-x'] = 'split'
+    fz['ctrl-v'] = 'vsplit'
+    vim.g.fzf_action = fz
 
-    {'junegunn/fzf', config = function()
-      local fz = {}
-      fz['ctrl-t'] = 'tab split'
-      fz['ctrl-x'] = 'split'
-      fz['ctrl-v'] = 'vsplit'
-      vim.g.fzf_action = fz
-
-      local fzLay = {}
-      fzLay['up']= '~100%'
-      local window = {}
-      window['width'] = 0.8
-      window['height'] = 0.8
-      window['yoffset'] = 0.5
-      window['xoffset']= 0.5
-      window['border'] = 'sharp'
-      fzLay['window'] = window
-      vim.g.fzf_layout = fzLay
-      vim.g.fzf_tags_command = 'ctags -R'
-      -- let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
-      -- vim.cmd"command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)"
-      -- vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden -g {!.git/**,!build/**,!.dart_tool/**,!.idea}"
+    local fzLay = {}
+    fzLay['up']= '~100%'
+    local window = {}
+    window['width'] = 0.8
+    window['height'] = 0.8
+    window['yoffset'] = 0.5
+    window['xoffset']= 0.5
+    window['border'] = 'sharp'
+    fzLay['window'] = window
+    vim.g.fzf_layout = fzLay
+    vim.g.fzf_tags_command = 'ctags -R'
+    -- let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+    -- vim.cmd"command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)"
+    -- vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden -g {!.git/**,!build/**,!.dart_tool/**,!.idea}"
   end, setup = {}},
-    {'junegunn/fzf.vim'},
+  {'junegunn/fzf.vim'},
   {'theHamsta/nvim-dap-virtual-text'},
   {'rcarriga/nvim-dap-ui'},
   {'folke/twilight.nvim', config = function()
@@ -286,8 +292,7 @@ lvim.plugins = {
       -- refer to the configuration section below
     }
   end},
-  { "marko-cerovac/material.nvim", config = function() 
-    vim.g.material_style = "darker"
+  { "marko-cerovac/material.nvim", config = function()
   end },
   {"stevearc/aerial.nvim", config = function()
   end}
@@ -323,6 +328,7 @@ lvim.builtin.lualine.options.section_separators = { left = "", right = ""}
 lvim.builtin.lualine.sections.lualine_a = {"mode"}
 lvim.builtin.lualine.sections.lualine_x = {"location"}
 lvim.builtin.lualine.sections.lualine_y = {"diff", "buffers", "filesize"}
+lvim.builtin.lualine.options.theme = 'material'
 vim.cmd[[
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
   inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
@@ -343,41 +349,83 @@ lvim.builtin.dap.on_config_done = function(dap)
 
   dap.configurations.javascript = { -- change this to javascript if needed
       {
-          type = "chrome",
-          request = "attach",
-          program = "${file}",
-          cwd = vim.fn.getcwd(),
-          sourceMaps = true,
-          protocol = "inspector",
-          port = 9222,
-          webRoot = "${workspaceFolder}"
-      }
+        name = 'Launch',
+        type = 'node2',
+        request = 'launch',
+        program = '${file}',
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = 'inspector',
+        console = 'integratedTerminal',
+      },
+      {
+        -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+        name = 'Attach to process',
+        type = 'node2',
+        request = 'attach',
+        processId = require'dap.utils'.pick_process,
+      },
+      -- {
+      --     type = "chrome",
+      --     request = "attach",
+      --     program = "${file}",
+      --     cwd = vim.fn.getcwd(),
+      --     sourceMaps = true,
+      --     protocol = "inspector",
+      --     port = 9229,
+      --     webRoot = "${workspaceFolder}"
+      -- }
   }
   dap.configurations.javascriptreact = { -- change this to javascript if needed
-      {
-          type = "chrome",
-          request = "attach",
-          program = "${file}",
-          cwd = vim.fn.getcwd(),
-          sourceMaps = true,
-          protocol = "inspector",
-          port = 9222,
-          webRoot = "${workspaceFolder}"
-      }
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
   }
 
   dap.configurations.typescriptreact = { -- change to typescript if needed
-      {
-          type = "chrome",
-          request = "attach",
-          program = "${file}",
-          cwd = vim.fn.getcwd(),
-          sourceMaps = true,
-          protocol = "inspector",
-          port = 9222,
-          webRoot = "${workspaceFolder}"
-      }
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
   }
+  -- dap.configurations.javascriptreact = { -- change this to javascript if needed
+  --     {
+  --         type = "chrome",
+  --         request = "attach",
+  --         program = "${file}",
+  --         cwd = vim.fn.getcwd(),
+  --         sourceMaps = true,
+  --         protocol = "inspector",
+  --         port = 9222,
+  --         webRoot = "${workspaceFolder}"
+  --     }
+  -- }
+
+  -- dap.configurations.typescriptreact = { -- change to typescript if needed
+  --     {
+  --         type = "chrome",
+  --         request = "attach",
+  --         program = "${file}",
+  --         cwd = vim.fn.getcwd(),
+  --         sourceMaps = true,
+  --         protocol = "inspector",
+  --         port = 9222,
+  --         webRoot = "${workspaceFolder}"
+  --     }
+  -- }
   vim.fn.sign_define('DapBreakpoint', {text='🕷' , texthl='' , linehl='', numhl=''})
 
   -- Dap virtual text
@@ -411,4 +459,6 @@ wilder.set_option('renderer', wilder.renderer_mux({
     highlighter = wilder.basic_highlighter(),
   }),
 }))
+
+vim.g.material_style = "darker"
 
