@@ -6,9 +6,11 @@ end
 -- Yay I made my first Lua function!
 local function footer()
   local handle = io.popen('date +%U')
-  local result = handle:read("*a")
-  handle:close()
-  return 'It is week ' .. result .. 'of 52'
+  if handle then
+    local result = handle:read("*a")
+    handle:close()
+    return 'It is week ' .. result .. 'of 52'
+  end
 end
 
 lvim.log.level = "warn"
