@@ -13,9 +13,13 @@ lvim.builtin.dap.active = true
 lvim.transparent_window = true
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
+lvim.lsp.diagnostics.float.focusable = true
 lvim.builtin.autopairs.active = true
+lvim.reload_config_on_save = false
 lvim.builtin.terminal.active = true
 lvim.builtin.breadcrumbs.active = true
+lvim.builtin.treesitter.highlight.enabled = true
+
 lvim.builtin.alpha.dashboard.section.header.opts.hl = PickColor()
 lvim.builtin.alpha.dashboard.section.footer.opts.hl = PickColor()
 

@@ -116,5 +116,14 @@ lvim.plugins = {
   },
   { 'simrat39/rust-tools.nvim' },
   { 'kvrohit/mellow.nvim' },
-  { 'terryma/vim-multiple-cursors' }
+  { 'terryma/vim-multiple-cursors' },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {"jackMort/ChatGPT.nvim"},
+  "nacro90/numb.nvim",
+  "kevinhwang91/nvim-bqf",
+  "lvimuser/lsp-inlayhints.nvim",
+  "lunarvim/synthwave84.nvim"
 }

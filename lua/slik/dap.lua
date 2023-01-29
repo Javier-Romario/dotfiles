@@ -1,107 +1,27 @@
--- DEBUGGING
-lvim.builtin.dap.on_config_done = function(dap)
-  dap.adapters.node2 = {
-    type = 'executable',
-    command = 'node',
-    args = { os.getenv('HOME') .. '/Programming/vscode-node-debug2/out/src/nodeDebug.js' },
-  }
-  dap.adapters.chrome = {
-    type = "executable",
-    command = "node",
-    args = { os.getenv("HOME") .. "/Programming/vscode-chrome-debug/out/src/chromeDebug.js" }
-  }
+local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+require("dap-vscode-js").setup {
+  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  debugger_path = mason_path .. "packages/js-debug-adapter", -- Path to vscode-js-debug installation.
+  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
+}
 
-  dap.configurations.javascript = { -- change this to javascript if needed
+for _, language in ipairs { "typescript", "javascript" } do
+  require("dap").configurations[language] = {
     {
-      name = 'Launch',
-      type = 'node2',
-      request = 'launch',
-      program = '${file}',
-      cwd = vim.fn.getcwd(),
-      sourceMaps = true,
-      protocol = 'inspector',
-      console = 'integratedTerminal',
+      type = "pwa-node",
+      request = "launch",
+      name = "Debug Jest Tests",
+      -- trace = true, -- include debugger info
+      runtimeExecutable = "node",
+      runtimeArgs = {
+        "./node_modules/jest/bin/jest.js",
+        "--runInBand",
+      },
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+      internalConsoleOptions = "neverOpen",
     },
-    {
-      -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-      name = 'Attach to process',
-      type = 'node2',
-      request = 'attach',
-      processId = require 'dap.utils'.pick_process,
-    },
-    -- {
-    --     type = "chrome",
-    --     request = "attach",
-    --     program = "${file}",
-    --     cwd = vim.fn.getcwd(),
-    --     sourceMaps = true,
-    --     protocol = "inspector",
-    --     port = 9229,
-    --     webRoot = "${workspaceFolder}"
-    -- }
   }
-  dap.configurations.javascriptreact = { -- change this to javascript if needed
-    {
-      type = "chrome",
-      request = "attach",
-      program = "${file}",
-      cwd = vim.fn.getcwd(),
-      sourceMaps = true,
-      protocol = "inspector",
-      port = 9222,
-      webRoot = "${workspaceFolder}"
-    }
-  }
-
-  dap.configurations.typescriptreact = { -- change to typescript if needed
-    {
-      type = "chrome",
-      request = "attach",
-      program = "${file}",
-      cwd = vim.fn.getcwd(),
-      sourceMaps = true,
-      protocol = "inspector",
-      port = 9222,
-      webRoot = "${workspaceFolder}"
-    }
-  }
-  dap.configurations.typescript = { -- change to typescript if needed
-    {
-      type = "chrome",
-      request = "attach",
-      program = "${file}",
-      cwd = vim.fn.getcwd(),
-      sourceMaps = true,
-      protocol = "inspector",
-      port = 9222,
-      webRoot = "${workspaceFolder}"
-    }
-  }
-
-  -- Dap virtual text
-  vim.cmd [[let g:dap_virtual_text = v:true]]
-  -- Dap UI
-  -- require('dapui').setup({
-  --   layouts = {
-  --     {
-  --       elements = {
-  --         -- Elements can be strings or table with id and size keys.
-  --         { id = "scopes", size = 0.25 },
-  --         "breakpoints",
-  --         "stacks",
-  --         "watches",
-  --       },
-  --       size = 40, -- 40 columns
-  --       position = "right",
-  --     },
-  --     {
-  --       elements = {
-  --         "repl",
-  --         "console",
-  --       },
-  --       size = 0.25, -- 25% of total lines
-  --       position = "bottom",
-  --     },
-  --   }
-  -- })
 end
