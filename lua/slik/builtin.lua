@@ -8,7 +8,7 @@ lvim.builtin.alpha.dashboard.section.header.val = {
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "tokyonight-moon"
+lvim.colorscheme = "tokyonight"
 lvim.builtin.dap.active = true
 lvim.transparent_window = true
 lvim.builtin.alpha.active = true
@@ -59,7 +59,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 local gheight = vim.api.nvim_list_uis()[1].height
 local gwidth = vim.api.nvim_list_uis()[1].width
 local width = 70
-local height = 50
+local height = 30
 
 lvim.builtin.nvimtree.setup.view.float = {
   enable = true,
@@ -89,3 +89,39 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+
+lvim.builtin.theme.tokyonight.options.on_highlights = function(hl, c)
+  local prompt = "#2d3149"
+  hl.TelescopeNormal = {
+    bg = c.bg_dark,
+    fg = c.fg_dark,
+  }
+  hl.TelescopeBorder = {
+    bg = c.bg_dark,
+    fg = c.bg_dark,
+  }
+  hl.TelescopePromptNormal = {
+    bg = prompt,
+  }
+  hl.TelescopePromptBorder = {
+    bg = prompt,
+    fg = prompt,
+  }
+  hl.TelescopePromptTitle = {
+    bg = prompt,
+    fg = prompt,
+  }
+  hl.TelescopePreviewTitle = {
+    bg = c.bg_dark,
+    fg = c.bg_dark,
+  }
+  hl.TelescopeResultsTitle = {
+    bg = c.bg_dark,
+    fg = c.bg_dark,
+  }
+  hl.DiagnosticUnderlineHint = {
+    guisp = '#445500',
+    sp = '#445500'
+  }
+end

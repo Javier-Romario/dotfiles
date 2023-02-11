@@ -10,13 +10,13 @@ lvim.keys.normal_mode["<leader>y"] = "\"+y"
 -- unmap a default keymapping
 lvim.keys.normal_mode["y"] = false
 lvim.keys.normal_mode["d"] = false
-lvim.builtin.which_key.mappings["t"] = {
-  name = "+Floaterm",
-  [";"] = { ":FloatermToggle --height=8<CR>", "Terminal" },
-  n = { ":FloatermNew node<CR>", "Node" },
-  f = { ":FloatermNew bpython<CR>", "bpython" },
-  t = { ":FloatermToggle<CR>", "Toggle" },
-}
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Terminal",
+-- [";"] = { ":ToggleTerm --height=8<CR>", "Terminal" },
+-- n = { ":TermExec cmd='node<CR>'", "Node" },
+-- f = { ":ToggleTerm bpython<CR>", "bpython" },
+-- t = { ":ToggleTerm<CR>", "Toggle" },
+-- }
 
 lvim.keys.normal_mode["Q"] = "!!sh<CR>"
 lvim.builtin.which_key.mappings['r'] = {
@@ -48,7 +48,12 @@ lvim.builtin.which_key.mappings['dT'] = { -- Dap UI
   ":lua require('dapui').toggle()<CR>", "UI Toggle"
 }
 
-lvim.builtin.which_key.mappings['F'] = {
-  name = '+fzf',
-  f = { ':Rg<CR>', "Find word" }
+lvim.builtin.which_key.mappings['ld'] = {
+  "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy layout_strategy=vertical<cr>",
+  "Buffer Diagnostics"
 }
+
+-- lvim.builtin.which_key.mappings['F'] = {
+--   name = '+fzf',
+--   f = { ':Rg<CR>', "Find word" }
+-- }

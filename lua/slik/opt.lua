@@ -1,4 +1,4 @@
-vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
+im.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true
 vim.opt.laststatus = 3
 
@@ -47,6 +47,7 @@ local options = {
   showcmd = false,
   ruler = false,
   expandtab = true, -- convert tabs to spaces
+  -- guifont = "VictorMono Nerd Font Mono:h16"
 }
 for k, v in pairs(options) do
   vim.opt[k] = v
