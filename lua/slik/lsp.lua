@@ -15,33 +15,33 @@ formatters.setup {
 }
 
 
--- local capabilities = require("lvim.lsp").common_capabilities()
+local capabilities = require("lvim.lsp").common_capabilities()
 
--- require("typescript").setup {
---   -- disable_commands = false, -- prevent the plugin from creating Vim commands
---   debug = true, -- enable debug logging for commands
---   go_to_source_definition = {
---     fallback = true, -- fall back to standard LSP definition on failure
---   },
---   server = { -- pass options to lspconfig's setup method
---     on_attach = require("lvim.lsp").common_on_attach,
---     on_init = require("lvim.lsp").common_on_init,
---     capabilities = capabilities,
---     settings = {
---       typescript = {
---         inlayHints = {
---           includeInlayEnumMemberValueHints = true,
---           includeInlayFunctionLikeReturnTypeHints = true,
---           includeInlayFunctionParameterTypeHints = false,
---           includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
---           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
---           includeInlayPropertyDeclarationTypeHints = true,
---           includeInlayVariableTypeHints = true,
---         },
---       },
---     },
---   },
--- }
+require "typescript".setup {
+  -- disable_commands = false, -- prevent the plugin from creating Vim commands
+  debug = true, -- enable debug logging for commands
+  go_to_source_definition = {
+    fallback = true, -- fall back to standard LSP definition on failure
+  },
+  server = { -- pass options to lspconfig's setup method
+    on_attach = require("lvim.lsp").common_on_attach,
+    on_init = require("lvim.lsp").common_on_init,
+    capabilities = capabilities,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = true,
+        },
+      },
+    },
+  },
+}
 
 local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
 require("dap-vscode-js").setup {
@@ -71,10 +71,18 @@ for _, language in ipairs { "typescript", "javascript" } do
   }
 end
 
-require 'lspconfig'.tsserver.setup {
+require('lspconfig').tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" },
   on_attach = require 'lsp'.tsserver_on_attach,
   -- This makes sure tsserver is not used for formatting (I prefer prettier)
   -- on_attach = require'lsp'.common_on_attach,
   settings = { documentFormatting = false }
 }
+
+-- require('lspconfig').intelephense.setup({
+--   settings = {
+--     intelephense = {
+
+--     }
+--   }
+-- })

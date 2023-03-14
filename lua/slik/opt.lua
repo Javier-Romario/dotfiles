@@ -1,13 +1,3 @@
-im.opt.conceallevel = 0 -- so that `` is visible in markdown files
-vim.opt.cursorline = true
-vim.opt.laststatus = 3
-
--- Configure the appearance
--- -- vim.g.mellow_italic_functions = true
-vim.g.mellow_bold_functions = true
-vim.g.mellow_italic_variables = true
-
-
 vim.diagnostic.config({
   virtual_text = {
     source = 'always',
@@ -28,8 +18,6 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-
-
 local options = {
   backup = false, -- creates a backup file
   clipboard = "unnamedplus", -- allows neovim to access the system clipboard
@@ -41,13 +29,20 @@ local options = {
   swapfile = false, -- creates a swapfile
   timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true, -- enable persistent undo
-  updatetime = 100, -- faster completion (4000ms default)
+  updatetime = 50, -- faster completion (4000ms default)
   writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   laststatus = 3,
   showcmd = false,
   ruler = false,
   expandtab = true, -- convert tabs to spaces
   -- guifont = "VictorMono Nerd Font Mono:h16"
+  -- conceallevel = 0 -- so that `` is visible in markdown files
+  cursorline = true,
+  relativenumber = false,
+  hlsearch = false,
+  incsearch = true,
+  tabstop = 2,
+  wrap = true,
 }
 for k, v in pairs(options) do
   vim.opt[k] = v

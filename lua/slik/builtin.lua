@@ -7,15 +7,17 @@ lvim.builtin.alpha.dashboard.section.header.val = {
 }
 
 lvim.log.level = "warn"
-lvim.format_on_save = true
-lvim.colorscheme = "tokyonight"
+lvim.format_on_save = {
+  pattern = { "*.php" }
+}
+lvim.colorscheme = "tokyonight-night"
 lvim.builtin.dap.active = true
 lvim.transparent_window = true
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.lsp.diagnostics.float.focusable = true
 lvim.builtin.autopairs.active = true
-lvim.reload_config_on_save = false
+lvim.reload_config_on_save = true
 lvim.builtin.terminal.active = true
 lvim.builtin.breadcrumbs.active = true
 lvim.builtin.treesitter.highlight.enabled = true
@@ -35,24 +37,6 @@ lvim.builtin.lualine.options.theme = 'material'
 lvim.builtin.lualine.sections.lualine_c = { "breadcrumbs" }
 lvim.builtin.lualine.options.globalstatus = true
 
--- lvim.builtin.treesitter.rainbow = {
---   enable = true,
---   extended_mode = true,
---   max_file_lines = 1000,
---   colors = {
---     "#f7768e",
---     "#9ece6a",
---     "#e0af68",
---     "#7aa2f7",
---     "#bb9af7",
---     "#7dcfff",
---   },
--- }
---
-
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 
 
@@ -88,7 +72,6 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
 
 
 lvim.builtin.theme.tokyonight.options.on_highlights = function(hl, c)

@@ -57,3 +57,23 @@ lvim.builtin.which_key.mappings['ld'] = {
 --   name = '+fzf',
 --   f = { ':Rg<CR>', "Find word" }
 -- }
+
+-- Normal --
+-- Better window navigation
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+keymap("n", "<m-h>", "<C-w>h", opts)
+keymap("n", "<m-j>", "<C-w>j", opts)
+keymap("n", "<m-k>", "<C-w>k", opts)
+keymap("n", "<m-l>", "<C-w>l", opts)
+keymap("n", "<m-tab>", "<c-6>", opts)
+
+function _G.set_terminal_keymaps()
+  vim.api.nvim_buf_set_keymap(0, "t", "<m-h>", [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<m-j>", [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<m-k>", [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<m-l>", [[<C-\><C-n><C-W>l]], opts)
+end
+
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")

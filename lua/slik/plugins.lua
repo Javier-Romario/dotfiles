@@ -3,7 +3,7 @@ lvim.plugins = {
   { 'kaputi/e-kaput.nvim' },
   { 'ldelossa/buffertag' },
   { 'yonlu/omni.vim' },
-  { 'iamcco/markdown-preview.nvim', run = "cd app && yarn" },
+  { 'iamcco/markdown-preview.nvim', build = "cd app && yarn" },
   { 'simrat39/symbols-outline.nvim' },
   { "rebelot/kanagawa.nvim" },
   { 'wellle/targets.vim' },
@@ -32,15 +32,12 @@ lvim.plugins = {
   {
     "windwp/nvim-ts-autotag",
     config = function()
-      require("nvim-ts-autotag").setup()
+      require "nvim-ts-autotag".setup()
     end,
   },
   {
-    "p00f/nvim-ts-rainbow",
-  },
-  {
     "nvim-treesitter/playground",
-    event = "BufRead",
+    -- event = "BufRead",
   },
   {
     "romgrk/nvim-treesitter-context",
@@ -75,11 +72,19 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-  { "jackMort/ChatGPT.nvim" },
+  { "jackMort/ChatGPT.nvim", dependencies = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim"
+  } },
   "nacro90/numb.nvim",
   "kevinhwang91/nvim-bqf",
   "lvimuser/lsp-inlayhints.nvim",
   "lunarvim/synthwave84.nvim",
   "norcalli/nvim-colorizer.lua",
-  "nyoom-engineering/oxocarbon.nvim"
+  "nyoom-engineering/oxocarbon.nvim",
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  { 'edluffy/hologram.nvim', config = true, lazy = { auto_display = true } },
+  { 'editorconfig/editorconfig-vim' },
+  { 'michaelb/sniprun', build = "./install.sh 1" }
 }
