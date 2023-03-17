@@ -19,3 +19,4 @@ reload 'slik.luasnip'
 reload 'slik.fidget'
 -- reload 'slik.tokyonight'
 reload 'slik.chatgpt'
+

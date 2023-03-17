@@ -86,5 +86,6 @@ lvim.plugins = {
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   { 'edluffy/hologram.nvim', config = true, lazy = { auto_display = true } },
   { 'editorconfig/editorconfig-vim' },
-  { 'michaelb/sniprun', build = "./install.sh 1" }
+  { 'michaelb/sniprun', build = "./install.sh 1" },
+  'ThePrimeagen/harpoon'
 }

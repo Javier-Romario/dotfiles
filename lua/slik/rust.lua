@@ -84,21 +84,21 @@ pcall(function()
   }
 end)
 
-lvim.builtin.dap.on_config_done = function(dap)
-  dap.adapters.codelldb = codelldb_adapter
-  dap.configurations.rust = {
-    {
-      name = "Launch file",
-      type = "codelldb",
-      request = "launch",
-      program = function()
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-      end,
-      cwd = "${workspaceFolder}",
-      stopOnEntry = false,
-    },
-  }
-end
+-- lvim.builtin.dap.on_config_done = function(dap)
+--   dap.adapters.codelldb = codelldb_adapter
+--   dap.configurations.rust = {
+--     {
+--       name = "Launch file",
+--       type = "codelldb",
+--       request = "launch",
+--       program = function()
+--         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+--       end,
+--       cwd = "${workspaceFolder}",
+--       stopOnEntry = false,
+--     },
+--   }
+-- end
 
 vim.api.nvim_set_keymap("n", "<m-d>", "<cmd>RustOpenExternalDocs<Cr>", { noremap = true, silent = true })
 
@@ -124,31 +124,31 @@ lvim.builtin.which_key.mappings["C"] = {
   D = { "<cmd>lua require'crates'.show_dependencies_popup()<cr>", "[crates] show dependencies" },
 }
 
-lvim.plugins = {
-  "simrat39/rust-tools.nvim",
-  {
-    "saecki/crates.nvim",
-    version = "v0.3.0",
-    dependencies= { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("crates").setup {
-        null_ls = {
-          enabled = true,
-          name = "crates.nvim",
-        },
-        popup = {
-          border = "rounded",
-        },
-      }
-    end,
-  },
-  {
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup()
-    end,
-  },
-}
+-- lvim.plugins = {
+--   "simrat39/rust-tools.nvim",
+--   {
+--     "saecki/crates.nvim",
+--     version = "v0.3.0",
+--     dependencies= { "nvim-lua/plenary.nvim" },
+--     config = function()
+--       require("crates").setup {
+--         null_ls = {
+--           enabled = true,
+--           name = "crates.nvim",
+--         },
+--         popup = {
+--           border = "rounded",
+--         },
+--       }
+--     end,
+--   },
+--   {
+--     "j-hui/fidget.nvim",
+--     config = function()
+--       require("fidget").setup()
+--     end,
+--   },
+-- }
 
 
 -- local rt = require("rust-tools")
