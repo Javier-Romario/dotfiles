@@ -17,6 +17,8 @@ reload 'slik.material'
 reload 'slik.aerial'
 reload 'slik.luasnip'
 reload 'slik.fidget'
--- reload 'slik.tokyonight'
+reload 'slik.tokyonight'
 reload 'slik.chatgpt'
+reload 'slik.copilot'
+
 

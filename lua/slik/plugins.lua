@@ -87,5 +87,6 @@ lvim.plugins = {
   { 'edluffy/hologram.nvim', config = true, lazy = { auto_display = true } },
   { 'editorconfig/editorconfig-vim' },
   { 'michaelb/sniprun', build = "./install.sh 1" },
-  'ThePrimeagen/harpoon'
+  'ThePrimeagen/harpoon',
+  "github/copilot.vim"
 }

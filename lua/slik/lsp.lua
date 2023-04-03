@@ -71,7 +71,7 @@ for _, language in ipairs { "typescript", "javascript" } do
   }
 end
 
-require('lspconfig').tsserver.setup {
+require 'lspconfig'.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" },
   on_attach = require 'lsp'.tsserver_on_attach,
   -- This makes sure tsserver is not used for formatting (I prefer prettier)

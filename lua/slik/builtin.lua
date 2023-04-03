@@ -10,7 +10,7 @@ lvim.log.level = "warn"
 lvim.format_on_save = {
   pattern = { "*.php" }
 }
-lvim.colorscheme = "tokyonight-night"
+lvim.colorscheme = "tokyonight-moon"
 lvim.builtin.dap.active = true
 lvim.transparent_window = true
 lvim.builtin.alpha.active = true
