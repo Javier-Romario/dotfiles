@@ -18,6 +18,10 @@ lvim.keys.normal_mode["d"] = false
 -- t = { ":ToggleTerm<CR>", "Toggle" },
 -- }
 
+lvim.builtin.which_key.mappings["gB"] = {
+  "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Git Blame"
+}
+
 lvim.keys.normal_mode["Q"] = "!!sh<CR>"
 lvim.builtin.which_key.mappings['r'] = {
   name = "+Trouble",

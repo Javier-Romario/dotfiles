@@ -108,3 +108,6 @@ lvim.builtin.theme.tokyonight.options.on_highlights = function(hl, c)
     sp = '#445500'
   }
 end
+
+-- toggleterm
+lvim.builtin.terminal.direction = 'horizontal'

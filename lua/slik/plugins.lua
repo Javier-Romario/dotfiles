@@ -83,10 +83,12 @@ lvim.plugins = {
   "lunarvim/synthwave84.nvim",
   "norcalli/nvim-colorizer.lua",
   "nyoom-engineering/oxocarbon.nvim",
+  "jose-elias-alvarez/typescript.nvim",
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   { 'edluffy/hologram.nvim', config = true, lazy = { auto_display = true } },
   { 'editorconfig/editorconfig-vim' },
   { 'michaelb/sniprun', build = "./install.sh 1" },
   'ThePrimeagen/harpoon',
-  "github/copilot.vim"
+  "github/copilot.vim",
+  {'akinsho/git-conflict.nvim', version = "*"}
 }
