@@ -90,5 +90,6 @@ lvim.plugins = {
   { 'michaelb/sniprun', build = "./install.sh 1" },
   'ThePrimeagen/harpoon',
   "github/copilot.vim",
-  {'akinsho/git-conflict.nvim', version = "*"}
+  {'akinsho/git-conflict.nvim', version = "*"},
+  -- {"ecthelionvi/NeoComposer.nvim"}
 }

@@ -22,6 +22,15 @@ lvim.builtin.which_key.mappings["gB"] = {
   "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Git Blame"
 }
 
+lvim.builtin.which_key.mappings['B'] = {
+  name = '+Aerial',
+  t = {'<cmd>AerialToggle<CR>', '+AerialToggle'}
+}
+lvim.builtin.which_key.mappings['U'] = {
+  name = "+UndoTree",
+  t = {"<cmd>UndotreeToggle<CR>", "+UndoTree Toggle"}
+}
+
 lvim.keys.normal_mode["Q"] = "!!sh<CR>"
 lvim.builtin.which_key.mappings['r'] = {
   name = "+Trouble",

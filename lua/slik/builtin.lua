@@ -15,7 +15,6 @@ lvim.builtin.dap.active = true
 lvim.transparent_window = true
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.lsp.diagnostics.float.focusable = true
 lvim.builtin.autopairs.active = true
 lvim.reload_config_on_save = true
 lvim.builtin.terminal.active = true
@@ -37,7 +36,7 @@ lvim.builtin.lualine.options.theme = 'material'
 lvim.builtin.lualine.sections.lualine_c = { "breadcrumbs" }
 lvim.builtin.lualine.options.globalstatus = true
 
-lvim.builtin.nvimtree.setup.view.side = "left"
+-- lvim.builtin.nvimtree.setup.view.side = "float"
 
 
 local gheight = vim.api.nvim_list_uis()[1].height
@@ -45,6 +44,7 @@ local gwidth = vim.api.nvim_list_uis()[1].width
 local width = 70
 local height = 30
 
+-- lvim.builtin.nvimtree.setup.view.float
 lvim.builtin.nvimtree.setup.view.float = {
   enable = true,
   open_win_config = {
@@ -53,7 +53,7 @@ lvim.builtin.nvimtree.setup.view.float = {
     height = height,
     row = (gheight - height) * 0.5,
     col = (gwidth - width) * 0.5
-  }
+  },
 }
 
 lvim.builtin.treesitter.ensure_installed = {
@@ -111,3 +111,17 @@ end
 
 -- toggleterm
 lvim.builtin.terminal.direction = 'horizontal'
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  -- vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
