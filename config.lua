@@ -10,6 +10,8 @@ reload 'slik.lsp'
 reload 'slik.customvim'
 reload 'slik.dap'
 reload 'slik.dap2'
+reload 'slik.navbuddy'
+reload 'slik.theme'
 
 -- Plugins
 reload 'slik.wilder'
@@ -20,5 +22,6 @@ reload 'slik.fidget'
 reload 'slik.tokyonight'
 reload 'slik.chatgpt'
 reload 'slik.copilot'
+reload 'slik.nim'
 
 

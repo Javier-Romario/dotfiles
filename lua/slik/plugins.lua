@@ -15,6 +15,7 @@ lvim.plugins = {
   { 'junegunn/fzf' },
   { 'junegunn/fzf.vim' },
   { 'theHamsta/nvim-dap-virtual-text' },
+  { 'ray-x/aurora' },
   { 'folke/twilight.nvim' },
   { "marko-cerovac/material.nvim", config = function()
     vim.g.material_style = "deep ocean"
@@ -92,4 +93,39 @@ lvim.plugins = {
   "github/copilot.vim",
   {'akinsho/git-conflict.nvim', version = "*"},
   -- {"ecthelionvi/NeoComposer.nvim"}
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+      "numToStr/Comment.nvim",        -- Optional
+      "nvim-telescope/telescope.nvim", -- Optional
+      opts = { lsp = { auto_attach = true } }
+    }
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          -- default options: exact mode, multi window, all directions, with a backdrop
+          require("flash").jump()
+        end,
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+      },
+    },
+  },
+  { "andrewradev/splitjoin.vim" }
 }

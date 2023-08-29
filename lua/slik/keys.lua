@@ -42,6 +42,15 @@ lvim.builtin.which_key.mappings['r'] = {
   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 
 }
+
+lvim.builtin.which_key.mappings['M'] = {
+  name= '+Harpoon',
+  m = {':lua require("harpoon.mark").add_file()<CR>', 'Add File'},
+  t = {':lua require("harpoon.ui").toggle_quick_menu()<CR>', 'Toggle Menu'},
+  n = {':lua require("harpoon.ui").nav_next()<CR>', 'Next'},
+  p = {':lua require("harpoon.ui").nav_prev()<CR>', 'Next'},
+}
+
 lvim.builtin.which_key.mappings['n'] = {
   name = '+symbols-outline',
   o = { ":SymbolsOutlineOpen<CR>", "SymbolsOutlineOpen" },
@@ -51,10 +60,10 @@ lvim.builtin.which_key.mappings['n'] = {
 lvim.builtin.which_key.mappings["dS"] = {
   ":lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", "scopes"
 }
-lvim.builtin.which_key.mappings["dU"] = {
+lvim.builtin.which_key.mappings["dN"] = {
   ":lua require'dap'.up()<CR>", "Up"
 }
-lvim.builtin.which_key.mappings["dD"] = {
+lvim.builtin.which_key.mappings["dP"] = {
   ":lua require'dap'.down()<CR>", "Down"
 }
 lvim.builtin.which_key.mappings['dT'] = { -- Dap UI
@@ -90,3 +99,5 @@ function _G.set_terminal_keymaps()
 end
 
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+
+
