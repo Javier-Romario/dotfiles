@@ -90,7 +90,7 @@ lvim.plugins = {
   { 'editorconfig/editorconfig-vim' },
   { 'michaelb/sniprun', build = "./install.sh 1" },
   'ThePrimeagen/harpoon',
-  "github/copilot.vim",
+  -- "github/copilot.vim",
   {'akinsho/git-conflict.nvim', version = "*"},
   -- {"ecthelionvi/NeoComposer.nvim"}
   {
@@ -107,7 +107,7 @@ lvim.plugins = {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
+    -- -@type Flash.Config
     opts = {},
     keys = {
       {
@@ -127,5 +127,11 @@ lvim.plugins = {
       },
     },
   },
-  { "andrewradev/splitjoin.vim" }
+  { "andrewradev/splitjoin.vim" },
+  {  'Exafunction/codeium.vim',
+  event = 'BufEnter'},
+  -- Go stuff
+  "olexsmir/gopher.nvim",
+  "leoluz/nvim-dap-go",
+
 }
