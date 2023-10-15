@@ -133,5 +133,14 @@ lvim.plugins = {
   -- Go stuff
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
+  
+  {
+    "aMOPel/nvim-treesitter-nim",
+    -- install/update parsers
+    build = {
+      ':TSUpdate nim',
+      ':TSUpdate nim_format_string',
+    },
+  }
 
 }
