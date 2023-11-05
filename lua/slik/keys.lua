@@ -22,6 +22,14 @@ lvim.builtin.which_key.mappings["gB"] = {
   "<cmd>Gitsigns toggle_current_line_blame<CR>", "Toggle Git Blame"
 }
 
+local mode = vim.fn.mode()
+if mode == 'v' or mode == 'V' then
+  lvim.builtin.which_key.mappings["G"] = {
+    name = "+Gen",
+    g = {":Gen<CR>", "Generate"}
+  }
+end
+
 lvim.builtin.which_key.mappings['B'] = {
   name = '+Aerial',
   t = {'<cmd>AerialToggle<CR>', '+AerialToggle'}

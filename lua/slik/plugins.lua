@@ -141,6 +141,13 @@ lvim.plugins = {
       ':TSUpdate nim',
       ':TSUpdate nim_format_string',
     },
-  }
-
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  { 'David-Kunz/gen.nvim' },
+  { 'JellyApple102/easyread.nvim' }
 }

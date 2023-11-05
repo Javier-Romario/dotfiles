@@ -24,5 +24,5 @@ reload 'slik.tokyonight'
 reload 'slik.chatgpt'
 reload 'slik.copilot'
 reload 'slik.nim'
-
-
+reload 'slik.oil'
+reload 'slik.easyread'
