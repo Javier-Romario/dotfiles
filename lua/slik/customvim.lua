@@ -14,3 +14,4 @@ vim.cmd [[
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
   inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
 ]]
+
