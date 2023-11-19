@@ -12,7 +12,7 @@ lvim.format_on_save = {
 }
 -- lvim.colorscheme = "tokyonight-moon"
 -- lvim.colorscheme = "synthwave84"
-lvim.colorscheme = "oxocarbon"
+lvim.colorscheme = "tokyonight-night"
 
 lvim.builtin.dap.active = true
 lvim.transparent_window = true
@@ -135,3 +135,8 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
+
+-- Sets the command mode to be editable with vim
+vim.cmd[[
+  nnoremap : q:i
+]]

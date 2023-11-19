@@ -68,7 +68,8 @@ lvim.plugins = {
   },
   { 'simrat39/rust-tools.nvim' },
   { 'kvrohit/mellow.nvim' },
-  { 'terryma/vim-multiple-cursors' },
+  -- { 'terryma/vim-multiple-cursors' },
+  { 'mg979/vim-visual-multi'},
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",

@@ -43,6 +43,9 @@ local options = {
   incsearch = true,
   tabstop = 2,
   wrap = true,
+  foldmethod = "expr",
+  foldexpr = "nvim_treesitter#foldexpr()",
+  foldcolumn = "1",
 }
 for k, v in pairs(options) do
   vim.opt[k] = v

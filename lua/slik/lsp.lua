@@ -86,3 +86,21 @@ require 'lspconfig'.tsserver.setup {
 --     }
 --   }
 -- })
+--
+lvim.builtin.treesitter.ensure_installed = {
+  "nim"
+}
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "nimls" })
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "nim_langserver" })
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "nimlangserver" })
+
+require'lspconfig'.nim_langserver.setup{
+  cmd = { "nimlangserver" },
+  filetypes = { "nim" },
+  root_dir =  "~/.nimble/bin/",
+  single_file_support = true
+}
+
