@@ -20,10 +20,15 @@ vim.keymap.del("n", "<leader>|")
 
 -- SAVE!
 local saveOpts = { noremap = true, silent = true, desc = "+Save" }
-keymap.set("n", "<leader>w", ":w<CR>", saveOpts)
+keymap.set({ "n" }, "<leader>w", ":w<CR>", saveOpts)
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
+
+-- CMD magic
+keymap.set("n", "Q", "!!sh<CR>", opts)
+
+keymap.set("n", "<leader>R", ":lua vim.lsp.codelens.run()<CR>", {})

@@ -1,36 +1,19 @@
 return {
   {
     "nvim-cmp",
-    -- dependencies = {
-    --   -- codeium
-    --   {
-    --     "Exafunction/codeium.nvim",
-    --     event = "BufEnter",
-    --     config = function()
-    --       vim.g.codeium_disable_bindings = 1
-    --       -- Change '<C-g>' here to any keycode you like.
-    --       vim.keymap.set("i", "<C-g>", function()
-    --         return vim.fn["codeium#Accept"]()
-    --       end, { expr = true })
-    --       vim.keymap.set("i", "<c-;>", function()
-    --         return vim.fn["codeium#CycleCompletions"](1)
-    --       end, { expr = true })
-    --       vim.keymap.set("i", "<c-,>", function()
-    --         return vim.fn["codeium#CycleCompletions"](-1)
-    --       end, { expr = true })
-    --       vim.keymap.set("i", "<c-x>", function()
-    --         return vim.fn["codeium#Clear"]()
-    --       end, { expr = true })
-    --     end,
-    --     cmd = "Codeium",
-    --     build = ":Codeium Auth",
-    --     opts = {},
-    --   },
-    -- },
+    dependencies = {
+      {
+        "Exafunction/codeium.nvim",
+        cmd = "Codeium",
+        build = ":Codeium Auth",
+        opts = {},
+        -- commit = "822e762567a0bf50b1a4e733c8c93691934d7606"
+      },
+    },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, {
-        name = "codeium",
+        name = "Codeium",
         group_index = 1,
         priority = 100,
       })
@@ -87,4 +70,46 @@ return {
       })
     end,
   },
+  {
+    "mg979/vim-visual-multi",
+  },
+  {
+    'bennypowers/splitjoin.nvim',
+    lazy = true,
+    keys = {
+      { 'gj', function() require 'splitjoin'.join() end,  desc = 'Join the object under cursor' },
+      { 'g,', function() require 'splitjoin'.split() end, desc = 'Split the object under cursor' },
+    },
+  }
 }
+
+
+--[[
+    -- dependencies = {
+    --   -- codeium
+    --   {
+    --     "Exafunction/codeium.nvim",
+    --     event = "BufEnter",
+    --     config = function()
+    --       vim.g.codeium_disable_bindings = 1
+    --       -- Change '<C-g>' here to any keycode you like.
+    --       vim.keymap.set("i", "<C-g>", function()
+    --         return vim.fn["codeium#Accept"]()
+    --       end, { expr = true })
+    --       vim.keymap.set("i", "<c-;>", function()
+    --         return vim.fn["codeium#CycleCompletions"](1)
+    --       end, { expr = true })
+    --       vim.keymap.set("i", "<c-,>", function()
+    --         return vim.fn["codeium#CycleCompletions"](-1)
+    --       end, { expr = true })
+    --       vim.keymap.set("i", "<c-x>", function()
+    --         return vim.fn["codeium#Clear"]()
+    --       end, { expr = true })
+    --     end,
+    --     cmd = "Codeium",
+    --     build = ":Codeium Auth",
+    --     opts = {},
+    --   },
+    -- },
+--]]
+--

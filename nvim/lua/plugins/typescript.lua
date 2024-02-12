@@ -37,4 +37,11 @@
 --
 return {
   { import = "lazyvim.plugins.extras.lang.typescript" },
+  {
+    'axelvc/template-string.nvim',
+    config = function()
+      require('template-string').setup({})
+    end,
+    opts = {}
+  }
 }

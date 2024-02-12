@@ -13,6 +13,7 @@ return {
       table.insert(opts.sections.lualine_y, { "diff", "filesize" })
       opts.extensions = { "quickfix", "fzf", "nvim-dap-ui", "nvim-tree" }
       opts.options.theme = "material-stealth"
+      -- "fluoromachine"
     end,
   },
 }
