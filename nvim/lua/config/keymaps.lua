@@ -32,3 +32,5 @@ keymap.set("n", "<C-m>", "<C-i>", opts)
 keymap.set("n", "Q", "!!sh<CR>", opts)
 
 keymap.set("n", "<leader>R", ":lua vim.lsp.codelens.run()<CR>", {})
+
+keymap.set("n", "<leader>e", ":Oil --float<CR>", {})
