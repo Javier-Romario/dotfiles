@@ -1,0 +1,27 @@
+os:
+  editPreset: "nvim"
+gui:
+  ## stuff relating to the UI
+  scrollHeight: 2
+  scrollPastBottom: true
+  mouseEvents: true
+  skipDiscardChangeWarning: false
+  skipStashWarning: true
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.3333
+  commitLength:
+    show: true
+  animateExplosion: true
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --24-bit-color=never
+  merging:
+    manualCommit: false
+    args: ""
+  skipHookPrefix: "WIP"
+  autoFetch: true
+update:
+  method: prompt # can be: prompt | background | never
+  days: 14 # how often a update is checked for
+confirmOnQuit: false
