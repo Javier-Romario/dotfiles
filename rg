@@ -1,0 +1,1 @@
+/Users/javierharford/.config/rg
