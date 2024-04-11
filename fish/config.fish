@@ -5,6 +5,8 @@ abbr --add gP "git push"
 abbr -a --set-cursor=! -- fff fd\ !\ \|\ fzf \ -m \| \ xargs\ lvim\ -o
 abbr -a llama --position anywhere --set-cursor "ollama run llama2 \"%\""
 abbr -a codellama --position anywhere --set-cursor "ollama run codellama \"%\""
+abbr -a odcf "z odc-front"
+abbr -a odcb "z odc-back"
 
 
 # completions for brew
@@ -22,3 +24,4 @@ zoxide init fish --cmd z | source
 starship init fish | source
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+set -gx PATH "$HOME/.nvm" $PATH
