@@ -36,7 +36,7 @@
 -- }
 --
 return {
-  { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- { import = "lazyvim.plugins.extras.lang.typescript" },
   {
     'axelvc/template-string.nvim',
     config = function()
