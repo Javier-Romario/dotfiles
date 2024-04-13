@@ -1,0 +1,29 @@
+div > .vimiumHintMarker {
+  /* linkhint boxes */
+  background: rgba( 78, 237, 221, 0.2 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 7px );
+  -webkit-backdrop-filter: blur( 7px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+  /*
+  border-radius: 50px;
+  background: linear-gradient(145deg, #b8e8eb, #9bc3c6);
+  box-shadow:  20px 20px 60px #92b8bb,
+              -20px -20px 60px #c6fafd;
+  */
+  padding: 4px;
+
+}
+
+div > .vimiumHintMarker span {
+  /* linkhint text */
+  color: #00ffff !important;
+  font-family: 'Berkeley Mono';
+  font-weight: bold;
+  font-size: 12px;
+}
+
+div > .vimiumHintMarker > .matchingCharacter {
+}
