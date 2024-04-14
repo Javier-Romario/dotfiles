@@ -1,5 +1,8 @@
 {
     "diagnostics.globals": [
         "overrides"
+    ],
+    "diagnostics.disable": [
+        "missing-fields"
     ]
 }

@@ -9,6 +9,7 @@ return {
         },
         opts = { skip = true },
       })
+      return opts
     end,
   },
   {
@@ -36,21 +37,21 @@ return {
       notify = {
         enabled = true,
       },
-      -- views = {
-      --   cmdline_popup = {
-      --     border = {
-      --       style = "none",
-      --       padding = { 2, 3 },
-      --     },
-      --     filter_options = {},
-      --     -- win_options = {
-      --     --   winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-      --     -- },
-      --   },
-      -- },
-      -- presets = {
-      --   command_palette = false,
-      -- },
+      views = {
+        cmdline_popup = {
+          border = {
+            style = "rounded",
+            padding = { 1, 2 },
+          },
+          filter_options = {},
+          win_options = {
+            winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+          },
+        },
+      },
+      presets = {
+        command_palette = false,
+      },
     },
   },
   {
