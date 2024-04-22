@@ -15,7 +15,7 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: delta --dark --paging=never --24-bit-color=never
+    pager: delta --dark --paging=never --line-numbers --24-bit-color=never
   merging:
     manualCommit: false
     args: ""
