@@ -8,7 +8,7 @@ return {
     build = ":MasonUpdate",
     opts = function(_, opts)
       local ensure_installed = {
-        "volar",
+        "vue-language-server",
       }
       opts.ensure_installed = opts.ensure_installed or {}
       for _,v in ipairs(ensure_installed) do

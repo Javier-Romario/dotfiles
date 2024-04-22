@@ -34,25 +34,6 @@ lspconfig.volar.setup {}
 --   return project_root and (util.path.join(project_root, 'node_modules', 'typescript', 'lib')) or ''
 -- end
 
-local mason_registry = require('mason-registry')
-local vue_language_server_path = mason_registry.get_package('vls'):get_install_path() .. '/node_modules/@vue/language-server'
-
--- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
-local volar_init_options = {
-  plugins = {
-    {
-      name = '@vue/typescript-plugin',
-      location = vue_language_server_path,
-      languages = { 'vue' },
-    },
-  },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-
-  typescript = {
-    tsdk = '/Users/javierharford/.volta/tools/shared/typescript/lib',
-  },
-}
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -61,26 +42,41 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function(_, opts)
+      local mason_registry = require('mason-registry')
+      local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
+      -- https://github.com/johnsoncodehk/volar/blob/20d713b/packages/shared/src/types.ts
+      local volar_init_options = {
+        plugins = {
+          {
+            name = '@vue/typescript-plugin',
+            location = vue_language_server_path,
+            languages = { 'vue' },
+          },
+        },
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+
+        typescript = {
+          tsdk = '/Users/javierbsg/.volta/tools/shared/typescript/lib',
+        },
+      }
       local volar = require("lspconfig").volar
 
       volar.setup({
         ---@diagnostic disable-next-line: unused-local
         on_new_config = function(new_config, new_root_dir)
-          print('this ran')
           new_config.init_options = volar_init_options
-          new_config.typescript.tsdk = '/Users/javierharford/.volta/tools/shared/typescript/lib'
+          new_config.typescript.tsdk = '/Users/javierbsg/.volta/tools/shared/typescript/lib'
         end,
         init_options = volar_init_options,
-        settings = opts.settings.settings
+        settings = opts.settings
       })
-
-      volar.settings = {}
     end,
     opts = {
     -- make sure mason installs the server
       servers = {
         ---@type lspconfig.options.tsserver
-        tsserver = {}
+        tsserver = {},
+        volar = {},
       }
     }
   }
