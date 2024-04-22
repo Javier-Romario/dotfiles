@@ -9,6 +9,7 @@ return {
     opts = function(_, opts)
       local ensure_installed = {
         "vue-language-server",
+        "eslint_d",
       }
       opts.ensure_installed = opts.ensure_installed or {}
       for _,v in ipairs(ensure_installed) do
