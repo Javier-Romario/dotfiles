@@ -8,6 +8,9 @@ abbr -a codellama --position anywhere --set-cursor "ollama run codellama \"%\""
 abbr -a odcf "z odc-front"
 abbr -a odcb "z odc-back"
 
+abbr -a nvst --position anywhere --set-cursor "nv (rg -l '%')"
+abbr -a nvmst --position anywhere --set-cursor "nv -o (rg -l '%')"
+abbr -a nvmp --position anywhere --set-cursor "nv -p (rg -l '%')"
 
 # completions for brew
 if test -d (brew --prefix)"/share/fish/completions"

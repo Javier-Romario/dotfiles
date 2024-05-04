@@ -5,7 +5,7 @@ vim.opt.swapfile = false
 vim.opt.relativenumber = false
 vim.opt.conceallevel = 2
 -- Enable LazyVim auto format
-vim.g.autoformat = true
+vim.g.autoformat = false
 
 local opt = vim.opt
 
