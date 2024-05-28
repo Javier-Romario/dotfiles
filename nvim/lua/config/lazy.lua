@@ -13,7 +13,7 @@ require("lazy").setup({
     {
       "LazyVim/LazyVim",
       opts = {
-        colorscheme = "duskfox",
+        -- colorscheme = "duskfox",
       },
       import = "lazyvim.plugins",
     },
@@ -46,16 +46,16 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
-    {
-      "folke/tokyonight.nvim",
-      opts = {
-        transparent = true,
-        styles = {
-          sidebars = "transparent",
-          floats = "transparent",
-        },
-      },
-    },
+    -- {
+    --   "folke/tokyonight.nvim",
+    --   opts = {
+    --     transparent = true,
+    --     styles = {
+    --       sidebars = "transparent",
+    --       floats = "transparent",
+    --     },
+    --   },
+    -- },
     {
       "EdenEast/nightfox.nvim",
       opts = {
@@ -92,13 +92,13 @@ require("lazy").setup({
           }
         end
 
-        fm.setup({
-          overrides = overrides,
-          colors = colors,
-          glow = false,
-          theme = "fluoromachine",
-          transparent = "full",
-        })
+        -- fm.setup({
+        --   overrides = overrides,
+        --   colors = colors,
+        --   glow = false,
+        --   -- theme = "fluoromachine",
+        --   transparent = "full",
+        -- })
         -- vim.cmd.colorscheme 'fluoromachine'
       end,
     },
@@ -124,7 +124,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = { colorscheme = { "tokyonight", "poimandres" }},
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {

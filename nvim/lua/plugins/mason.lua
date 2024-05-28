@@ -1,68 +1,105 @@
 return {
   {
     "williamboman/mason.nvim",
+    cmd = "Mason",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-    cmd = "Mason",
     build = ":MasonUpdate",
-    opts = function(_, opts)
-      local ensure_installed = {
-        "vue-language-server",
-        "eslint_d",
-      }
-      opts.ensure_installed = opts.ensure_installed or {}
-      for _,v in ipairs(ensure_installed) do
-        table.insert(opts.ensure_installed, v)
-      end
-      return opts
-    end,
-    -- config = function(_, opts)
-    --   require("mason").setup(opts)
-    --
-    --   print('mason ran')
-    -- end
+    config = function()
+
+      local mason = require("mason")
+      -- import mason-lspconfig
+      local mason_lspconfig = require("mason-lspconfig")
+
+      local mason_tool_installer = require("mason-tool-installer")
+      -- enable mason and configure icons
+      mason.setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      })
+
+      mason_lspconfig.setup({
+        -- list of servers for mason to install
+        ensure_installed = {
+          "tsserver",
+          "html",
+          "htmx",
+          "cssls",
+          "tailwindcss",
+          "svelte",
+          "lua_ls",
+          "graphql",
+          "emmet_ls",
+          "prismals",
+          "pyright",
+          "gopls",
+          "bashls",
+          "yamlls",
+          "matlab_ls",
+        },
+        -- auto-install configured servers (with lspconfig)
+        automatic_installation = {}, -- not the same as ensure_installed
+      })
+
+      mason_tool_installer.setup({
+        ensure_installed = {
+          "prettier", -- prettier formatter
+          "stylua", -- lua formatter
+          "isort", -- python formatter
+          "black", -- python formatter
+          "pylint", -- python linter
+          -- "eslint_d", -- js linter
+        },
+      })
+
+    end
   }
-  -- "williamboman/mason.nvim",
-  -- dependencies = {
-  --   "WhoIsSethDaniel/mason-tool-installer.nvim",
-  -- },
-  -- opts = {
-  --   ensure_installed = {
-  --     "lua-language-server",
-  --     "typescript-language-server",
-  --     "stylua",
-  --     "prettierd",
-  --     "stylelint",
-  --     "eslint_d",
-  --     "eslint-lsp",
-  --     "vue-language-server",
-  --   },
-  -- },
-  -- config = function(_, opts)
-  --   local mason = require("mason")
-  --
-  --   local mason_tool_installer = require("mason-tool-installer")
-  --   -- enable mason and configure icons
-  --   mason.setup({
-  --     ui = {
-  --       icons = {
-  --         package_installed = "✓",
-  --         package_pending = "➜",
-  --         package_uninstalled = "✗",
-  --       },
-  --     },
-  --   })
-  --
-  --   mason_tool_installer.setup({
-  --     ensure_installed = {
-  --       "prettier", -- prettier formatter
-  --       "stylua", -- lua formatter
-  --       "isort", -- python formatter
-  --       "black", -- python formatter
-  --       "pylint", -- python linter
-  --       "eslint_d", -- js linter
-  --     },
-  --   })
-  -- end,
 }
+--
+-- return {
+--   "williamboman/mason-lspconfig",
+--   dependencies = {
+--     "williamboman/mason.nvim",
+--   },
+--   opts = function(_, opts)
+--     local ensure_installed = {
+--       "vls",
+--       "volar",
+--       "eslint",
+--       "typescript",
+--       "biome",
+--       "gopls",
+--     }
+--     opts.ensure_installed = opts.ensure_installed or {}
+--     -- for _,v in ipairs(ensure_installed) do
+--     --   table.insert(opts.ensure_installed, v)
+--     -- end
+--     servers = {
+--       ---@type lspconfig.options.tsserver
+--       tsserver = {},
+--       volar = {},
+--       stylelint = {},
+--       gopls = {
+--         hints = {
+--           assignVariableTypes = true,
+--           compositeLiteralFields = true,
+--           compositeLiteralTypes = true,
+--           constantValues = true,
+--           functionTypeParameters = true,
+--           parameterNames = true,
+--           rangeVariableTypes = true,
+--         },
+--       },
+--     }
+--     opts.servers = servers
+--     return opts
+--   end,
+-- }
+--

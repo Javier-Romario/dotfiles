@@ -37,3 +37,4 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 --
 -- vim.cmd("hi! link MiniIndentscopeSymbol field")
+
