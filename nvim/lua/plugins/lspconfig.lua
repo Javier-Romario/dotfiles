@@ -5,7 +5,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       { "antosha417/nvim-lsp-file-operations", config = true },
     },
-    config = function()
+    config = function(_, opts)
       -- import lspconfig plugin
       local lspconfig = require("lspconfig")
       -- import cmp-nvim-lsp plugin

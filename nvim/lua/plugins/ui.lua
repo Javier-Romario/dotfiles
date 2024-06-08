@@ -23,6 +23,7 @@ return {
       -- vim.cmd("colorscheme poimandres")
     end
   },
+  { "shmerl/neogotham" },
   {
     "folke/noice.nvim",
     opts = function(_, opts)

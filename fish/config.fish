@@ -12,6 +12,10 @@ abbr -a nvst --position anywhere --set-cursor "nv (rg -l '%')"
 abbr -a nvmst --position anywhere --set-cursor "nv -o (rg -l '%')"
 abbr -a nvmp --position anywhere --set-cursor "nv -p (rg -l '%')"
 
+
+# specific for SPR app that im developing IN RUST BTW
+abbr -a killSPR 'kill -9 (procs --no-header spr | awk \'{print $1}\')'
+
 # completions for brew
 if test -d (brew --prefix)"/share/fish/completions"
     set -p fish_complete_path (brew --prefix)/share/fish/completions
