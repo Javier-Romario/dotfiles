@@ -35,6 +35,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
+    { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
@@ -72,7 +73,7 @@ require("lazy").setup({
         function colors(_, d)
           return {
             bg = "#190920",
-            alt_bg = d("#000000", 20),
+            -- alt_bg = d("#000000", 20),
             cyan = "#08d1c0",
             -- cyan = '#00F8BE',
             yellow = "#E0AF68",
@@ -92,14 +93,14 @@ require("lazy").setup({
           }
         end
 
-        -- fm.setup({
-        --   overrides = overrides,
-        --   colors = colors,
-        --   glow = false,
-        --   -- theme = "fluoromachine",
-        --   transparent = "full",
-        -- })
-        -- vim.cmd.colorscheme 'fluoromachine'
+        fm.setup({
+          overrides = overrides,
+          colors = colors,
+          glow = false,
+          -- theme = "fluoromachine",
+          transparent = "full",
+        })
+        vim.cmd.colorscheme 'fluoromachine'
       end,
     },
     {

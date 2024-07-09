@@ -43,6 +43,7 @@ return {
           "bashls",
           "yamlls",
           "matlab_ls",
+          "vtsls",
         },
         -- auto-install configured servers (with lspconfig)
         automatic_installation = {}, -- not the same as ensure_installed
