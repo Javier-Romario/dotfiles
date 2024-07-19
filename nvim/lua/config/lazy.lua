@@ -70,10 +70,11 @@ require("lazy").setup({
       "maxmx03/fluoromachine.nvim",
       config = function()
         local fm = require("fluoromachine")
-        function colors(_, d)
+        function colors(_, color)
           return {
-            bg = "#190920",
-            -- alt_bg = d("#000000", 20),
+            bg = "#232931",
+            bgdark = color.darken("#232931", 20),
+            alt_bg = color.darken("#232931", 20),
             cyan = "#08d1c0",
             -- cyan = '#00F8BE',
             yellow = "#E0AF68",
@@ -97,8 +98,9 @@ require("lazy").setup({
           overrides = overrides,
           colors = colors,
           glow = false,
-          -- theme = "fluoromachine",
-          transparent = "full",
+          theme = "fluoromachine",
+          -- transparent = "full",
+          transparent = true,
         })
         vim.cmd.colorscheme 'fluoromachine'
       end,
@@ -125,7 +127,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "poimandres" }},
+  install = { colorscheme = { "tokyonight", "maxmx03/fluoromachine.nvim" }},
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {

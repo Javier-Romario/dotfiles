@@ -8,12 +8,13 @@ return {
     },
     opts = function(_, opts)
       table.insert(opts.sections.lualine_x, "😄")
-      -- table.insert(opts.sections.lualine_a, { "mode" })
+      table.insert(opts.sections.lualine_a, { "mode" })
       table.insert(opts.sections.lualine_x, { "location" })
       table.insert(opts.sections.lualine_y, { "diff", "filesize" })
       opts.extensions = { "quickfix", "fzf", "nvim-dap-ui", "nvim-tree" }
-      -- opts.options.theme = "material-stealth"
-      opts.options.theme = "poimandres"
+      -- opts.options.theme = "fluoromachine"
+      opts.options.theme = "material-stealth"
+      -- opts.options.theme = "poimandres"
       -- "fluoromachine"
     end,
   },

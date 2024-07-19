@@ -8,16 +8,6 @@ local opts = { noremap = true, silent = true }
 keymap.set("n", "+", "<C-a>", opts)
 keymap.set("n", "-", "<C-x>", opts)
 
--- Deleting default keymaps
--- windows
-vim.keymap.del("n", "<leader>ww")
-vim.keymap.del("n", "<leader>wd")
-vim.keymap.del("n", "<leader>w-")
-vim.keymap.del("n", "<leader>w|")
-vim.keymap.del("n", "<leader>-")
-vim.keymap.del("n", "<leader>|")
---
-
 -- SAVE!
 local saveOpts = { noremap = true, silent = true, desc = "+Save" }
 keymap.set({ "n" }, "<leader>w", ":w<CR>", saveOpts)
@@ -34,3 +24,32 @@ keymap.set("n", "Q", "!!sh<CR>", opts)
 keymap.set("n", "<leader>R", ":lua vim.lsp.codelens.run()<CR>", {})
 
 keymap.set("n", "<leader>e", ":Oil --float<CR>", {})
+
+keymap.set(
+  {"n","v"},
+  "<leader>a",
+  ":'<,'>!xargs -I {} rg -n {}<CR>",
+  opts
+)
+
+
+keymap.set(
+  {"n","v"},
+  "<leader>A",
+  function()
+    -- Yank the word
+    vim.cmd('normal! yw')
+    -- Open a new line below and paste
+    vim.cmd('normal! o')
+    vim.cmd('normal! p')
+    vim.cmd('normal! _')
+    -- Visually select the word
+    vim.cmd('normal! V')
+    -- vim.cmd('vi <leader>a<CR>')
+    -- Run the rg command on the selected text
+    -- local selected_text = vim.fn.getreg('"')
+    -- vim.cmd('!' .. 'rg -n ' .. vim.fn.shellescape(selected_text))
+  end,
+  --  "ywop_vw<Esc><cmd>'<,'>!xargs -I {} rg -n {}<CR>",
+  {noremap = false, silent = true}
+)

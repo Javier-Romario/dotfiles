@@ -119,14 +119,14 @@ return {
       },
     },
   },
-  {
-    "xiyaowong/transparent.nvim",
-    opts = {
-      extra_groups = {
-        "NeoTreeNormal",
-        "NeoTreeNormalNC",
-        "NormalFloat",
-      },
-    }
-  }
+  -- {
+  --   "xiyaowong/transparent.nvim",
+  --   opts = {
+  --     extra_groups = {
+  --       "NeoTreeNormal",
+  --       "NeoTreeNormalNC",
+  --       "NormalFloat",
+  --     },
+  --   }
+  -- }
 }
