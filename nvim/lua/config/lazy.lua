@@ -102,7 +102,7 @@ require("lazy").setup({
           -- transparent = "full",
           transparent = true,
         })
-        vim.cmd.colorscheme 'fluoromachine'
+        -- vim.cmd.colorscheme 'fluoromachine'
       end,
     },
     {
