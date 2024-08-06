@@ -20,6 +20,12 @@ return {
         subdir = "Templates",
         date_format = "%d-%m-%Y",
       },
+      ui = {
+        enabled = true,
+        hl_groups = {
+          ObsidianBlockID = { italic = true, fg = "#D9E0EE" },
+        }
+      }
     }
   },
 }
