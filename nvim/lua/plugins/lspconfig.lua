@@ -5,14 +5,18 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       { "antosha417/nvim-lsp-file-operations", config = true },
     },
-    config = function(_, opts)
+    config = function(_, _) -- lazy, opts
       -- import lspconfig plugin
       local lspconfig = require("lspconfig")
       -- import cmp-nvim-lsp plugin
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-      local opts = { noremap = true, silent = true }
+      -- local vue_language_server_path = '/Users/javierbsg/.volta/tools/shared/@vue/language-server'
+      local vue_typescript_plugin = require("mason-registry").get_package("vue-language-server"):get_install_path()
+      .. "/node_modules/@vue/language-server"
+      .. "/node_modules/@vue/typescript-plugin"
 
+      local opts = { noremap = true, silent = true }
 
       local keymap = vim.keymap -- for conciseness
 
@@ -20,19 +24,19 @@ return {
         opts.buffer = bufnr
         -- set keybinds
         opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+        keymap.set("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- show definition, references
 
         opts.desc = "Go to declaration"
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+        keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()", opts) -- go to declaration
 
         opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
-
+        keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementations()<CR>", opts) -- show lsp implementations
+        --
         opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
-
-        opts.desc = "Show buffer diagnostics"
-        keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+        keymap.set("n", "gt", "<cmd>lua vim.lsp.lsp_type_definitions()<CR>", opts) -- show lsp type definitions
+        --
+        -- opts.desc = "Show buffer diagnostics"
+        -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -70,6 +74,16 @@ return {
       lspconfig["tsserver"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
+        init_options = {
+          plugins = {
+            {
+              name = '@vue/typescript-plugin',
+              location = vue_typescript_plugin,
+              languages = { 'vue' },
+            },
+          }
+        },
+        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
       })
 
       -- configure css server
@@ -83,7 +97,7 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
- 
+
       -- configure emmet language server
       lspconfig["emmet_ls"].setup({
         capabilities = capabilities,

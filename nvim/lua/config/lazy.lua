@@ -25,23 +25,23 @@ require("lazy").setup({
     --   dir = "~/Programming/.nvim"
     -- },
     -- import any extras modules here
-    { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.rust" },
-    { import = "lazyvim.plugins.extras.ui.edgy" },
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- { import = "lazyvim.plugins.extras.lang.rust" },
+    -- { import = "lazyvim.plugins.extras.ui.edgy" },
     { import = "lazyvim.plugins.extras.coding.codeium" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     -- { import = "lazyvim.plugins.extras.editor.aerial" },
     -- { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
-    { import = "lazyvim.plugins.extras.lang.docker" },
+    -- { import = "lazyvim.plugins.extras.formatting.prettier" },
+    -- { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.tailwind" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
-    { import = "lazyvim.plugins.extras.linting.eslint" },
+    -- { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-    { import = "lazyvim.plugins.extras.vscode" },
+    -- { import = "lazyvim.plugins.extras.vscode" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
-    { import = "lazyvim.plugins.extras.lsp.none-ls" },
+    -- { import = "lazyvim.plugins.extras.lsp.none-ls" },
     { import = "lazyvim.plugins.extras.test.core" },
     { import = "plugins" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
@@ -117,6 +117,50 @@ require("lazy").setup({
       end,
       priority = 1000,
     },
+    {
+      "eldritch-theme/eldritch.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {
+
+      },
+      config = function()
+        require("eldritch").setup({
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          transparent = true, -- Enable this to disable setting the background color
+          terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+          styles = {
+            -- Style to be applied to different syntax groups
+            -- Value is any valid attr-list value for `:help nvim_set_hl`
+            comments = { italic = true },
+            keywords = { italic = true },
+            functions = {},
+            variables = {},
+            -- Background styles. Can be "dark", "transparent" or "normal"
+            sidebars = "dark", -- style for sidebars, see below
+            floats = "dark", -- style for floating windows
+          },
+          sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+          hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+          dim_inactive = false, -- dims inactive windows, transparent must be false for this to work
+          lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
+
+          --- You can override specific color groups to use other groups or a hex color
+          --- function will be called with a ColorScheme table
+          ---@param colors ColorScheme
+          on_colors = function(colors) end,
+
+          --- You can override specific highlights to use other groups or a hex color
+          --- function will be called with a Highlights and ColorScheme table
+          ---@param highlights Highlights
+          ---@param colors ColorScheme
+          on_highlights = function(highlights, colors) end,
+        })
+        -- load the colorscheme here
+        -- vim.cmd([[colorscheme eldritch]])
+      end,
+    }
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.

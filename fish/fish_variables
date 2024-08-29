@@ -66,4 +66,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d2e3c64
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/opt/homebrew/opt/node\x4020/bin\x1e/Users/javierbsg/\x2envm\x1e/Users/javierbsg/\x2ecargo/bin\x1e/opt/homebrew/opt/mysql\x2dclient/bin\x1e/opt/homebrew/opt/ruby/bin\x1e/Users/javierharford/\x2elocal/bin\x1e/Users/javierharford/\x2enimble/bin\x1e/Users/javierharford/\x2ecargo/bin\x1e/opt/homebrew/bin/
+SETUVAR fish_user_paths:/opt/homebrew/opt/node\x4020/bin\x1e/Users/javierbsg/\x2envm\x1e/Users/javierbsg/\x2ecargo/bin\x1e/opt/homebrew/opt/mysql\x2dclient/bin\x1e/opt/homebrew/opt/ruby/bin\x1e/Users/javierharford/\x2elocal/bin\x1e/Users/javierharford/\x2enimble/bin\x1e/Users/javierharford/\x2ecargo/bin\x1e/opt/homebrew/bin/\x1e/Users/javierbsg/\x2erye/shims
