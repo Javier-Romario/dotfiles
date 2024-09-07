@@ -1,5 +1,13 @@
 return {
   {
+    'sindrets/diffview.nvim',
+    -- lazy = true,
+  },
+  {
+    'https://github.com/tpope/vim-fugitive',
+    -- lazy = true
+  },
+  {
     "kdheepak/lazygit.nvim",
     cmd = {
       "LazyGit",
