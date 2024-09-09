@@ -1,7 +1,45 @@
+let zoxide_completer = {|spans|
+    $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD}
+}
+
+let carapace_completer = {|spans: list<string>|
+    carapace $spans.0 nushell ...$spans
+    | from json
+    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+}
+
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | $"value(char tab)description(char newline)" + $in
     | from tsv --flexible --no-infer
+}
+
+# This completer will use carapace by default
+let external_completer = {|spans|
+    let expanded_alias = scope aliases
+    | where name == $spans.0
+    | get -i 0.expansion
+
+    let spans = if $expanded_alias != null {
+        $spans
+        | skip 1
+        | prepend ($expanded_alias | split row ' ' | take 1)
+    } else {
+        $spans
+    }
+
+    match $spans.0 {
+        # carapace completions are incorrect for nu
+        nu => $fish_completer
+        # fish completes commits and branch names in a nicer way
+        git => $fish_completer
+        # carapace doesn't have completions for asdf
+        asdf => $fish_completer
+        # use zoxide completions for zoxide commands
+        __zoxide_z => $zoxide_completer
+        __zoxide_zi => $zoxide_completer
+        _ => $carapace_completer
+    } | do $in $spans
 }
 
 $env.config = {
@@ -22,11 +60,11 @@ $env.config = {
     case_sensitive: false # set to true to enable case-sensitive completions
     quick: true    # set this to false to prevent auto-selecting completions when only one remains
     partial: true    # set this to false to prevent partial filling of the prompt
-    algorithm: "prefix"    # prefix or fuzzy
+    algorithm: "fuzzy"    # prefix or fuzzy
     external: {
       enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
       max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-      completer: $fish_completer # check 'carapace_completer' above as an example
+      completer: $external_completer # check 'carapace_completer' above as an example
     }
   }
 
@@ -46,8 +84,8 @@ $env.config = {
         col_padding: 2
       }
       style: {
-        text: green
-        selected_text: green_reverse
+        text: { fg: "#00F8BE" } #green
+        selected_text: { fg: "#202020"   bg: "#00F8BE" attribute: b }
         description_text: yellow
       }
     }
@@ -84,17 +122,6 @@ $env.config = {
       }
     }
   ]
-
-
 }
 
-use ~/.cache/starship/init.nu
-alias nv = nvim
-alias exa = eza
-alias y = yazi
-alias xx = dexit
-alias lg = lazygit
-
-# zoxide init nushell
-source ~/.config/nushell/.zoxide.gen.nu
-source ~/.config/nushell/rnu.nu
+source ~/.config/nushell/extend.nu
