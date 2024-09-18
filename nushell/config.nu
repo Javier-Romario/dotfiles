@@ -122,6 +122,20 @@ $env.config = {
       }
     }
   ]
+  keybindings: [
+    {
+      name: fuzzy_file
+      modifier: alt
+      keycode: char_t
+      mode: [vi_insert vi_normal]
+      event: {
+        send: executehostcommand
+        cmd: "commandline edit --insert (fzf --layout=reverse)"
+      }
+    }
+  ]
 }
+
+$env.FZF_DEFAULT_OPTS = "--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 
 source ~/.config/nushell/extend.nu

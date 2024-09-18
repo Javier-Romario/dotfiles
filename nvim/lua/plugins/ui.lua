@@ -1,5 +1,5 @@
 return {
-  { 
+  {
     "olivercederborg/poimandres.nvim",
     lazy = false,
     priority = 1000,
@@ -83,6 +83,7 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       background_colour = "#000000",
+      render = "wrapped-compact",
     },
   },
   {
@@ -144,5 +145,58 @@ return {
 
       -- vim.cmd "colorscheme flow"
     end
+  },
+  -- {
+  --   "shellRaining/hlchunk.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = function()
+  --     require("hlchunk").setup({
+  --       chunk = {
+  --         enable = false,
+  --         chars = {
+  --           horizontal_line = "─",
+  --           vertical_line = "│",
+  --           left_top = "╭",
+  --           left_bottom = "╰",
+  --           right_arrow = ">",
+  --         },
+  --         textobject = "ic",
+  --         style = "#00F8BE",
+  --       },
+  --       indent = {
+  --         enable = true,
+  --         chars = {
+  --           "․",
+  --           "⁚",
+  --           "⁖",
+  --           "⁘",
+  --           "⁙",
+  --         },
+  --         style = {
+  --           "#666666",
+  --           "#555555",
+  --           "#444444",
+  --         },
+  --       },
+  --       blank = {
+  --         enable = true,
+  --         chars = {
+  --           " ",
+  --         },
+  --         style = {
+  --           { bg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("cursorline")), "bg", "gui") },
+  --           { bg = "", fg = "" },
+  --         },
+  --       }
+  --       -- blank = {
+  --       --   enable = true
+  --       -- },
+  --     })
+  --   end
+  -- },
+  {
+    "water-sucks/darkrose.nvim",
+    lazy = false,
+    priority = 1000,
   },
 }

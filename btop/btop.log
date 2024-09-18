@@ -46,3 +46,12 @@
 2024/08/19 (07:10:02) | DEBUG: no intel sensors found
 2024/08/19 (09:40:53) | DEBUG: Writing new config file
 2024/08/19 (09:40:53) | INFO: Quitting! Runtime: 02:30:51
+
+2024/09/11 (12:51:50) | ===> btop++ v.1.3.2
+2024/09/11 (12:51:50) | INFO: Logger set to DEBUG
+2024/09/11 (12:51:50) | DEBUG: Using locale en_GB.UTF-8
+2024/09/11 (12:51:50) | INFO: Running on /dev/ttys001
+2024/09/11 (12:51:50) | DEBUG: get_sensors(): show_coretemp=1 check_temp=1
+2024/09/11 (12:51:50) | DEBUG: checking intel
+2024/09/11 (12:51:50) | DEBUG: no intel sensors found
+2024/09/11 (12:51:51) | INFO: Quitting! Runtime: 00:00:01

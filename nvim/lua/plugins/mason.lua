@@ -28,7 +28,7 @@ return {
       mason_lspconfig.setup({
         -- list of servers for mason to install
         ensure_installed = {
-          "tsserver",
+          "ts_ls",
           "html",
           "htmx",
           "cssls",
@@ -44,6 +44,9 @@ return {
           "yamlls",
           "matlab_ls",
           "vtsls",
+          -- "markdown",
+          -- "markdown-oxide",
+          "marksman",
         },
         -- auto-install configured servers (with lspconfig)
         automatic_installation = {}, -- not the same as ensure_installed
