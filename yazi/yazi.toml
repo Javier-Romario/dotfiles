@@ -1,0 +1,19 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+[manager]
+sort_dir_first = true
+linemode = "size_and_ctime"
+show_hidden = true
+show_symlink = true
+
+[preview]
+tab_size = 2
+wrap = "yes"
+# image_delay = 30
+image_filter = "triangle"
+image_quality = 75
+sixel_fraction = 15
+ueberzug_scale = 1
+ueberzug_offset = [0, 0, 0, 0]
+
