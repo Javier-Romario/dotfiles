@@ -67,6 +67,10 @@ require("lazy").setup({
           dim_inactive = true,
         },
       },
+      config = function(_, opts)
+        require("nightfox").setup(opts)
+        -- vim.cmd("colorscheme nightfox")
+      end,
     },
     {
       "maxmx03/fluoromachine.nvim",
@@ -104,7 +108,7 @@ require("lazy").setup({
           -- transparent = "full",
           transparent = true,
         })
-        vim.cmd.colorscheme 'fluoromachine'
+        -- vim.cmd.colorscheme 'fluoromachine'
       end,
     },
     {
