@@ -21,9 +21,10 @@ keymap.set("n", "<C-m>", "<C-i>", opts)
 -- CMD magic
 keymap.set("n", "Q", "!!sh<CR>", opts)
 
-keymap.set("n", "<leader>R", ":lua vim.lsp.codelens.run()<CR>", {})
+keymap.set("n", "<leader>R", ":lua vim.lsp.codelens.run()<CR>", { desc = "Open yazi nvim"})
 
-keymap.set("n", "<leader>e", ":Oil --float<CR>", {})
+-- keymap.set("n", "<leader>e", "<cmd>Oil --float<CR>", {})
+keymap.set("n", "<leader>e", function() require("yazi").yazi() end, {})
 
 keymap.set(
   {"n","v"},
@@ -53,3 +54,7 @@ keymap.set(
   --  "ywop_vw<Esc><cmd>'<,'>!xargs -I {} rg -n {}<CR>",
   {noremap = false, silent = true}
 )
+
+
+keymap.set({"n", "v"}, "<S-h>", "<cmd>FzfLua buffers<CR>")
+keymap.set({"n", "v"}, "<S-l>", "<cmd>FzfLua buffers<CR>")

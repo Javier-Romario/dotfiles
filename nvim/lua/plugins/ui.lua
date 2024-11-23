@@ -16,14 +16,7 @@ return {
       }
       -- vim.cmd("colorscheme poimandres")
     end,
-
-    -- optionally set the colorscheme within lazy config
-    init = function()
-      -- print('this happended')
-      -- vim.cmd("colorscheme poimandres")
-    end
   },
-  { "shmerl/neogotham" },
   {
     "folke/noice.nvim",
     opts = function(_, opts)
@@ -138,8 +131,9 @@ return {
     config = function()
       require("flow").setup {
         transparent = true, -- Set transparent background.
+        high_contrast = false,
         fluo_color = "pink", --  Fluo color: pink, yellow, orange, or green.
-        mode = "normal", -- Intensity of the palette: normal, dark, or bright. Notice that dark is ugly!
+        mode = "bright", -- Intensity of the palette: normal, dark, or bright. Notice that dark is ugly!
         aggressive_spell = false, -- Display colors for spell check.
       }
 
@@ -198,5 +192,47 @@ return {
     "water-sucks/darkrose.nvim",
     lazy = false,
     priority = 1000,
+    config = function()
+      require("darkrose").setup()
+      -- vim.cmd "colorscheme darkrose"
+    end
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    opts = { },
+    cache = false,
+    config = function()
+      require('tokyonight').setup({
+        style = 'night',
+        transparent = true,
+        terminal_colors = false,
+        styles = {
+          sidebars = "transparent",
+          floats = "dark",
+          comments = { italic = true },
+          keys = { italic = true },
+          functions = {},
+          variables = {},
+        },
+        on_colors = function(colors)
+          colors.yellow = '#ff757f'
+          -- print(vim.inspect(colors)) 
+        end,
+        on_highlights = function(highlights, colors)
+          highlights.WinBar1 = {
+            fg = "#00F8BE",
+            bg = "NONE",
+          }
+
+          highlights.WinBar2 = {
+            fg = "#00F8BE",
+            bg = "NONE",
+          }
+        end,
+
+      })
+      vim.cmd "colorscheme tokyonight-night"
+    end
   },
 }
