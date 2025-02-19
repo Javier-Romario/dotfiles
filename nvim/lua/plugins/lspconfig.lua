@@ -8,19 +8,15 @@ return {
     config = function(_, _) -- lazy, opts
       -- import lspconfig plugin
       local lspconfig = require("lspconfig")
+
       -- import cmp-nvim-lsp plugin
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-      -- local vue_language_server_path = '/Users/javierbsg/.volta/tools/shared/@vue/language-server'
-      local vue_typescript_plugin = require("mason-registry").get_package("vue-language-server"):get_install_path()
-      .. "/node_modules/@vue/language-server"
-      .. "/node_modules/@vue/typescript-plugin"
 
       local opts = { noremap = true, silent = true }
 
       local keymap = vim.keymap -- for conciseness
 
-      local on_attach = function(client, bufnr)
+      local on_attach = function(_, bufnr) -- client, bufnr
         opts.buffer = bufnr
         -- set keybinds
         opts.desc = "Show LSP references"
@@ -70,30 +66,8 @@ return {
         },
       })
 
-      -- configure typescript server with plugin
-      lspconfig["tsserver"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        init_options = {
-          plugins = {
-            {
-              name = '@vue/typescript-plugin',
-              location = vue_typescript_plugin,
-              languages = { 'vue' },
-            },
-          }
-        },
-        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-      })
-
       -- configure css server
       lspconfig["cssls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- configure tailwindcss server
-      lspconfig["tailwindcss"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
@@ -125,6 +99,79 @@ return {
           },
         },
       })
+
+      local mason_registry = require('mason-registry')
+      local vue_ls = mason_registry.get_package('vue-language-server')
+      local got
+      if vue_ls then
+          -- print(vue_ls:get_install_path()) -- Debug output
+          got = vue_ls:get_install_path() .. '/node_modules/@vue/language-server'
+          -- print('got it', type(got))
+      else
+          print("Vue Language Server not found in Mason registry.")
+      end
+
+      lspconfig.ts_ls.setup {
+        -- Initial options for the TypeScript language server
+        init_options = {
+          plugins = {
+            {
+              -- Name of the TypeScript plugin for Vue
+              name = '@vue/typescript-plugin',
+              location = got,
+              -- location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+              languages = { 'vue' },
+            }
+          },
+        },
+
+        -- Specify the file types that will trigger the TypeScript language server
+        filetypes = {
+          'typescript',          -- TypeScript files (.ts)
+          'javascript',          -- JavaScript files (.js)
+          'javascriptreact',     -- React files with JavaScript (.jsx)
+          'typescriptreact',     -- React files with TypeScript (.tsx)
+          'vue'                  -- Vue.js single-file components (.vue)
+        },
+      }
+
+      lspconfig.volar.setup {
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
+        },
+        settings = {
+          -- typescript = {
+          --   inlayHints = {
+          --     enumMemberValues = {
+          --       enabled = true,
+          --     },
+          --     functionLikeReturnTypes = {
+          --       enabled = true,
+          --     },
+          --     propertyDeclarationTypes = {
+          --       enabled = true,
+          --     },
+          --     parameterTypes = {
+          --       enabled = true,
+          --       suppressWhenArgumentMatchesName = true,
+          --     },
+          --     variableTypes = {
+          --       enabled = true,
+          --     },
+          --   },
+          -- },
+        },
+        -- cmd = {
+        --   "npm",
+        --   "vue-language-server",
+        --   "--stdio",
+        -- },
+      }
+
+      lspconfig.eslint.setup {}
+
     end,
   },
 }

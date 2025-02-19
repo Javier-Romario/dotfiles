@@ -28,6 +28,8 @@ return {
       mason_lspconfig.setup({
         -- list of servers for mason to install
         ensure_installed = {
+          "volar",
+          "eslint",
           "ts_ls",
           "html",
           "htmx",
@@ -44,6 +46,8 @@ return {
           "yamlls",
           "matlab_ls",
           "vtsls",
+          "stylelint_lsp",
+          -- "sonarlint",
           -- "markdown",
           -- "markdown-oxide",
           "marksman",
@@ -58,7 +62,7 @@ return {
           "stylua", -- lua formatter
           "isort", -- python formatter
           "black", -- python formatter
-          "pylint", -- python linter
+          -- "pylint", -- python linter
           -- "eslint_d", -- js linter
         },
       })
@@ -66,44 +70,3 @@ return {
     end
   }
 }
---
--- return {
---   "williamboman/mason-lspconfig",
---   dependencies = {
---     "williamboman/mason.nvim",
---   },
---   opts = function(_, opts)
---     local ensure_installed = {
---       "vls",
---       "volar",
---       "eslint",
---       "typescript",
---       "biome",
---       "gopls",
---     }
---     opts.ensure_installed = opts.ensure_installed or {}
---     -- for _,v in ipairs(ensure_installed) do
---     --   table.insert(opts.ensure_installed, v)
---     -- end
---     servers = {
---       ---@type lspconfig.options.tsserver
---       tsserver = {},
---       volar = {},
---       stylelint = {},
---       gopls = {
---         hints = {
---           assignVariableTypes = true,
---           compositeLiteralFields = true,
---           compositeLiteralTypes = true,
---           constantValues = true,
---           functionTypeParameters = true,
---           parameterNames = true,
---           rangeVariableTypes = true,
---         },
---       },
---     }
---     opts.servers = servers
---     return opts
---   end,
--- }
---

@@ -18,17 +18,17 @@ require("lazy").setup({
       import = "lazyvim.plugins",
     },
     -- local plugins need to be explicitly configured with dir
-    {
-      dir = "~/Programming/velocity.nvim",
-    },
+    -- {
+    --   dir = "~/Programming/velocity.nvim",
+    -- },
     -- {
     --   dir = "~/Programming/.nvim"
     -- },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.rust" },
     -- { import = "lazyvim.plugins.extras.ui.edgy" },
-    { import = "lazyvim.plugins.extras.coding.codeium" },
+    -- { import = "lazyvim.plugins.extras.coding.codeium" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.editor.aerial" },
     { import = "lazyvim.plugins.extras.dap.core" },
@@ -45,7 +45,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.toml" },
     { import = "lazyvim.plugins.extras.test.core" },
     { import = "lazyvim.plugins.extras.lang.nushell" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "plugins" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
     -- import/override with your plugins
