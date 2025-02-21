@@ -1,0 +1,20 @@
+layout {
+    cwd "~/Programming/Bright/BrightManager/accountancymanager-v1/"
+    pane split_direction="vertical" {
+      pane command="docker-compose" {
+        args "exec" "app-server" "npm" "run" "watch"
+      }
+      pane {
+        // command "nvim"
+        // args "components/App.vue"
+        cwd "public_html/assets/js/vue/apps/tasks-list-2/"
+        size "80%"
+        focus true
+      }
+    }
+    pane size=1 borderless=true {
+      plugin location="zellij:compact-bar"
+      // plugin location="zellij:status-bar"
+
+    }
+}

@@ -171,6 +171,7 @@ return {
       }
 
       lspconfig.eslint.setup {}
+      lspconfig.biome.setup {}
 
     end,
   },
