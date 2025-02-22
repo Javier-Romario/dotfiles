@@ -5,5 +5,6 @@ return {
     ft = { 'rust' },
     lazy = true,
     enabled = true,
-  }
+  },
+  { "cordx56/rustowl", dependencies = { "neovim/nvim-lspconfig" } }
 }

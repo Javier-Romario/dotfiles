@@ -19,7 +19,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # We now change some default values, which are applied to all further items.
 # For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
-bar=( 
+bar=(
   color=0x00000000
   margin=12
   padding_left=2

@@ -1,0 +1,28 @@
+themes {
+    // poimandres {
+    //     fg "#1b1e28"
+    //     bg "#a6accd"
+    //     red "#ff5370"
+    //     green "#4fd6be"
+    //     yellow "#ffc777"
+    //     blue "#3e68d7"
+    //     magenta "#fc7b7b"
+    //     orange 255 184 108
+    //     cyan "#86e1fc"
+    //     black "#444a73"
+    //     white "#d0d0d0"
+    // }
+    poimandres {
+      fg      "#E4F0FB"
+        bg      "#171922"
+        black   "#26233a"
+        red     "#D0679D"
+        green   "#5DE4C7"
+        yellow  "#FFFAC2"
+        blue    "#89DDFF"
+        magenta "#BC93FA"
+        cyan    "#ADD7FF"
+        white   "#e0def4"
+        orange  "#f1be78"
+    }
+}
