@@ -12,10 +12,9 @@ return {
       -- table.insert(opts.sections.lualine_x, { "location" })
       table.insert(opts.sections.lualine_y, { "diff", "filesize" })
       opts.extensions = { "quickfix", "fzf", "nvim-dap-ui", "nvim-tree", "aerial", "oil", "symbols-outline", "trouble", "fzf" }
-      -- opts.options.theme = "fluoromachine"
       opts.options.theme = "material-stealth"
       -- opts.options.theme = "poimandres"
-      -- "fluoromachine"
+      -- opts.options.theme = "fluoromachine"
     end,
   },
 }

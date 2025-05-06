@@ -58,3 +58,15 @@ keymap.set(
 
 keymap.set({"n", "v"}, "<S-h>", "<cmd>FzfLua buffers<CR>")
 keymap.set({"n", "v"}, "<S-l>", "<cmd>FzfLua buffers<CR>")
+
+
+keymap.set({"n","v"}, "<C-M-/>", function()
+  Snacks.terminal(nil, { win = { position = "float" } })
+end)
+
+-- keymap(
+--     "n",
+--     "<c-o>",
+--     require("rustowl").rustowl_cursor,
+--     { noremap = true, silent = true }
+-- )

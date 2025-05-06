@@ -5,6 +5,17 @@ return {
     -- local navic = require 'nvim-navic'
     local devicons = require 'nvim-web-devicons'
     require('incline').setup {
+      hide = {
+        cursorline = true,
+        focused_win = false,
+        only_win = false
+      },
+      window = {
+        placement = {
+          horizontal = "right",
+          vertical = "bottom"
+        },
+      },
       render = function(props)
         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':.')
         if filename == '' then

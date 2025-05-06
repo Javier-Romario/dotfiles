@@ -173,6 +173,11 @@ return {
       lspconfig.eslint.setup {}
       lspconfig.biome.setup {}
 
+      -- lspconfig.rustowl.setup {
+      --   trigger = {
+      --     hover = false,
+      --   },
+      -- }
     end,
   },
 }

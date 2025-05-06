@@ -43,6 +43,7 @@ git:
     args: ""
   skipHookPrefix: "WIP"
   autoFetch: true
+  difftoolCmd: "nvim '+colo material-darker' -d {{ .From }} {{ .To }} "
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often a update is checked for
