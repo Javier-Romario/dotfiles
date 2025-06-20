@@ -1,0 +1,50 @@
+os:
+  editPreset: "nvim"
+gui:
+  theme:
+    activeBorderColor:
+      - '#333333'
+      - bold
+    inactiveBorderColor:
+      - '#868686'
+    optionsTextColor:
+      - '#89b4fa'
+    selectedLineBgColor:
+      - '#313244'
+    cherryPickedCommitBgColor:
+      - '#45475a'
+    cherryPickedCommitFgColor:
+      - '#94e2d5'
+    unstagedChangesColor:
+      - '#f38ba8'
+    searchingActiveBorderColor:
+      - '#f9e2af'
+    defaultFgColor:
+      - ##4A4A4A
+  authorColors:
+    '*': '#b4befe'
+  ## stuff relating to the UI
+  scrollHeight: 2
+  scrollPastBottom: true
+  mouseEvents: true
+  skipDiscardChangeWarning: false
+  skipStashWarning: true
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.3333
+  commitLength:
+    show: true
+  animateExplosion: true
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never --line-numbers
+  merging:
+    manualCommit: false
+    args: ""
+  skipHookPrefix: "WIP"
+  autoFetch: true
+  difftoolCmd: "nvim '+colo e-ink' -d {{ .From }} {{ .To }} "
+update:
+  method: prompt # can be: prompt | background | never
+  days: 14 # how often a update is checked for
+confirmOnQuit: false

@@ -17,6 +17,8 @@ abbr -a nvmp --position anywhere --set-cursor "nv -p (rg -l '%')"
 # specific for SPR app that im developing IN RUST BTW
 abbr -a killSPR 'kill -9 (procs --no-header spr | awk \'{print $1}\')'
 
+abbr !! --position anywhere --function last_history_item
+
 # completions for brew
 if test -d (brew --prefix)"/share/fish/completions"
     set -p fish_complete_path (brew --prefix)/share/fish/completions
@@ -27,9 +29,16 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
 end
 # end completions for brew
 
+source ~/.config/fish/themes/TokyoNightNight.theme
 atuin init fish | source
 zoxide init fish --cmd z | source
 starship init fish | source
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 set -gx PATH "$HOME/.nvm" $PATH
+
+# Generated for envman. Do not edit.
+test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
+
+# Added by Windsurf
+fish_add_path /Users/javierbsg/.codeium/windsurf/bin

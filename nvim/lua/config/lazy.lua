@@ -2,8 +2,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
   -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
-    lazypath })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
@@ -103,7 +102,7 @@ require("lazy").setup({
         fm.setup({
           overrides = overrides,
           colors = colors,
-          glow = false,
+          glow = true,
           theme = "fluoromachine",
           -- transparent = "full",
           transparent = true,
@@ -166,6 +165,50 @@ require("lazy").setup({
         -- load the colorscheme here
         -- vim.cmd([[colorscheme eldritch]])
       end,
+    },
+    {
+      "idr4n/github-monochrome.nvim",
+      lazy = false,
+      priority = 1000,
+      opts = {},
+    },
+    {
+      "metalelf0/black-metal-theme-neovim",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        require("black-metal").setup({
+          -- optional configuration here
+          theme = "Marduk",
+          -- Don't set background
+          transparent = false,
+        })
+        -- require("black-metal").load()
+      end,
+    },
+    {
+      "alexxGmZ/e-ink.nvim",
+      priority = 1000,
+      config = function ()
+        require("e-ink").setup()
+        vim.cmd.colorscheme "e-ink"
+
+        -- choose light mode or dark mode
+        vim.opt.background = "dark"
+        -- vim.opt.background = "light"
+
+        -- or do
+        -- :set background=dark
+        -- :set background=light
+
+        -- set Transparent
+        local set_hl = vim.api.nvim_set_hl
+        local mono = require("e-ink.palette").mono()
+        local everforest = require("e-ink.palette").everforest()
+
+         set_hl(0, "Normal", { fg = mono[12], bg = "NONE" })
+        set_hl(1, "Group", { fg = everforest.green })
+      end
     }
   },
   defaults = {
@@ -174,7 +217,7 @@ require("lazy").setup({
     lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
+    -- version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "maxmx03/fluoromachine.nvim" }},

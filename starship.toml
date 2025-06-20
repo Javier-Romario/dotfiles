@@ -1,14 +1,15 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 add_newline = false
 format = """
-[╭{slik} ](fg:#00F8BE bold)[$username$directory$battery$all$line_break$character](fg:#9a7ecc bold)"""
+
+[╭](fg:#5E5E5E bold bg:none)[$username$directory$battery$all$line_break$character](bg:none bold fg:#00F8BE)"""
 
 right_format = """$git_branch$git_state$git_status$time$cmd_duration"""
 
 [character]
-success_symbol = '[╰─➣](fg:#00F8BE bold)'
-error_symbol = '[╰─➣](fg:#CC2B52 bold)'
-vimcmd_symbol = '[╰─🚀](fg:#00F8BE bold)'
+success_symbol = '[╰─🤙](bg:none bold fg:#5E5E5E)'
+error_symbol = '[╰─🫸](bg:none bold fg:#5E5E5E)'
+vimcmd_symbol = '[╰─🤌](bg:none bold fg:#5E5E5E)'
 
 
 [git_branch]
@@ -16,8 +17,8 @@ format = '[ $symbol$branch]($style) '
 style = 'cyan'
 
 [directory]
-format = "[](fg:#00F8BE bg:none)[$path]($style)[ ](fg:#00F8BE bg:none)"
-style = "fg:#000000 bg:#00F8BE"
+format = "[](bg:none fg:#5E5E5E)[$path]($style)[ ](bg:none fg:#5E5E5E)"
+style = "fg:#00F8BE bg:#5E5E5E bold"
 truncate_to_repo=false
 
 [username]

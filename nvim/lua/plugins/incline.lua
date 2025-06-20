@@ -5,6 +5,17 @@ return {
     -- local navic = require 'nvim-navic'
     local devicons = require 'nvim-web-devicons'
     require('incline').setup {
+      hide = {
+        cursorline = true,
+        focused_win = false,
+        only_win = false
+      },
+      window = {
+        placement = {
+          horizontal = "right",
+          vertical = "bottom"
+        },
+      },
       render = function(props)
         local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':.')
         if filename == '' then
@@ -16,7 +27,7 @@ return {
           ft_icon and { ' ', ft_icon, ' ', guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or '',
           ' ',
           { filename, gui = modified and 'bold,italic' or 'bold' },
-          guibg = '#44406e',
+          guibg = 'NONE',
         }
         -- if props.focused then
         --   for _, item in ipairs(navic.get_data(props.buf) or {}) do

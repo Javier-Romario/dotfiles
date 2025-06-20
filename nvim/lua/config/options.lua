@@ -90,3 +90,48 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end
 })
 
+vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
+
+
+vim.keymap.set("v", "<leader>e", function()
+    -- Save current register and mode
+  local original_reg = vim.fn.getreg('"')
+  local original_mode = vim.fn.mode()
+
+  -- Yank the selection into the default register (")
+  vim.cmd('normal! ""y')
+
+  -- Get the selected text
+  local selected = vim.fn.getreg('"')
+
+  -- Restore original register
+  vim.fn.setreg('"', original_reg)
+
+  ---@module 'snacks'
+  Snacks.terminal('ig ' .. selected:gsub("\n", "\\n"))
+
+  -- You can now do anything with selected_text
+end, { desc = "Use visual selection", silent = true })
+
+
+-- vimdiff fixes
+vim.cmd([[
+  augroup diffcolors
+      autocmd!
+      autocmd Colorscheme * call s:SetDiffHighlights()
+  augroup END
+
+  function! s:SetDiffHighlights()
+      if &background == "dark"
+          highlight DiffAdd gui=bold guifg=none guibg=#2e4b2e
+          highlight DiffDelete gui=bold guifg=none guibg=#4c1e15
+          highlight DiffChange gui=bold guifg=none guibg=#45565c
+          highlight DiffText gui=bold guifg=none guibg=#996d74
+      else
+          highlight DiffAdd gui=bold guifg=none guibg=palegreen
+          highlight DiffDelete gui=bold guifg=none guibg=tomato
+          highlight DiffChange gui=bold guifg=none guibg=lightblue
+          highlight DiffText gui=bold guifg=none guibg=lightpink
+      endif
+  endfunction
+]])
