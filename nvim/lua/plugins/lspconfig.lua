@@ -76,7 +76,7 @@ return {
       lspconfig["emmet_ls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+        filetypes = { "vue", "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
       })
 
       -- configure lua server (with special settings)
@@ -103,10 +103,12 @@ return {
       local mason_registry = require('mason-registry')
       local vue_ls = mason_registry.get_package('vue-language-server')
       local got
+      -- vim.inspect(mason_registry)
+      -- print(vue_ls) -- Debug output
       if vue_ls then
-          -- print(vue_ls:get_install_path()) -- Debug output
           got = vue_ls:get_install_path() .. '/node_modules/@vue/language-server'
-          -- print('got it', type(got))
+          print('got it', type(got))
+          print('got it', got)
       else
           print("Vue Language Server not found in Mason registry.")
       end

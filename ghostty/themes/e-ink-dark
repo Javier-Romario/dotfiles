@@ -1,10 +1,14 @@
-background = #2D2D2D
+background = #2F2F2F
+# background = #3D3D3D
 foreground = #C2C2C2
 palette = 0=#333333
 palette = 1=#CCCCCC
-palette = 2=#686868
+# palette = 2=#686868
+palette = 2=#3CFFE0
 palette = 3=#7C7C7C
-palette = 4=#868686
+#palette = 4=#868686
+palette = 4=#D72890 
+
 palette = 5=#5E5E5E
 palette = 6=#B8B8B8
 palette = 7=#A4A4A4

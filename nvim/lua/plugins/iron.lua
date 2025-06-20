@@ -14,7 +14,12 @@ return {
               -- Can be a table or a function that
               -- returns a table (see below)
               command = { "zsh" }
-            }
+            },
+            fish = {
+              -- Can be a table or a function that
+              -- returns a table (see below)
+              command = { "fish" }
+            },
           },
           -- How the repl window will be displayed
           -- See below for more information

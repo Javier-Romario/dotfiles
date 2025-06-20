@@ -194,9 +194,9 @@ require("lazy").setup({
         vim.cmd.colorscheme "e-ink"
 
         -- choose light mode or dark mode
-        -- vim.opt.background = "dark"
+        vim.opt.background = "dark"
         -- vim.opt.background = "light"
-        --
+
         -- or do
         -- :set background=dark
         -- :set background=light
@@ -204,8 +204,10 @@ require("lazy").setup({
         -- set Transparent
         local set_hl = vim.api.nvim_set_hl
         local mono = require("e-ink.palette").mono()
+        local everforest = require("e-ink.palette").everforest()
 
-        set_hl(0, "Normal", { fg = mono[12], bg = "NONE" })
+         set_hl(0, "Normal", { fg = mono[12], bg = "NONE" })
+        set_hl(1, "Group", { fg = everforest.green })
       end
     }
   },

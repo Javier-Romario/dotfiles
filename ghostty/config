@@ -1,6 +1,7 @@
 theme = "e-ink-dark"
-window-title-font-family = "Berkeley Mono Variable"
-
+# theme = "e-ink-light"
+# window-title-font-family = "Berkeley Mono Variable"
+# font-family = "Jetbrains Mono Nerd Font Mono"
 font-family = "Berkeley Mono Variable"
 # font-family = "Monaspace Krypton Var"
 font-variation = "wght=100"
@@ -9,7 +10,7 @@ font-variation-italic = "wght=300"
 font-thicken = true
 font-thicken-strength = 127
 
-background-opacity = 0.95
+background-opacity = 0.8
 background-blur-radius = 20
 adjust-cell-height = 60%
 # adjust-cell-width = 2%

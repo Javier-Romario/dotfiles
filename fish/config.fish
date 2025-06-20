@@ -29,7 +29,7 @@ if test -d (brew --prefix)"/share/fish/vendor_completions.d"
 end
 # end completions for brew
 
-
+source ~/.config/fish/themes/TokyoNightNight.theme
 atuin init fish | source
 zoxide init fish --cmd z | source
 starship init fish | source
@@ -39,7 +39,6 @@ set -gx PATH "$HOME/.nvm" $PATH
 
 # Generated for envman. Do not edit.
 test -s ~/.config/envman/load.fish; and source ~/.config/envman/load.fish
-
 
 # Added by Windsurf
 fish_add_path /Users/javierbsg/.codeium/windsurf/bin

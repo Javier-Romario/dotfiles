@@ -3,10 +3,10 @@ os:
 gui:
   theme:
     activeBorderColor:
-      - '#94e2d5'
+      - '#333333'
       - bold
     inactiveBorderColor:
-      - '#a6adc8'
+      - '#868686'
     optionsTextColor:
       - '#89b4fa'
     selectedLineBgColor:
@@ -17,10 +17,10 @@ gui:
       - '#94e2d5'
     unstagedChangesColor:
       - '#f38ba8'
-    defaultFgColor:
-      - '#CCCCCC'
     searchingActiveBorderColor:
       - '#f9e2af'
+    defaultFgColor:
+      - ##4A4A4A
   authorColors:
     '*': '#b4befe'
   ## stuff relating to the UI
@@ -37,13 +37,13 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: delta --syntax-theme tokyo-night --paging=never --line-numbers --24-bit-color=never
+    pager: delta --paging=never --line-numbers
   merging:
     manualCommit: false
     args: ""
   skipHookPrefix: "WIP"
   autoFetch: true
-  difftoolCmd: "nvim '+colo material-darker' -d {{ .From }} {{ .To }} "
+  difftoolCmd: "nvim '+colo e-ink' -d {{ .From }} {{ .To }} "
 update:
   method: prompt # can be: prompt | background | never
   days: 14 # how often a update is checked for
