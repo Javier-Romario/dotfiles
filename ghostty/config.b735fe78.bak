@@ -1,5 +1,5 @@
-theme = dark:e-ink-dark,light:e-ink-light
-# theme = 
+theme = "e-ink-dark"
+# theme = "e-ink-light"
 # window-title-font-family = "Berkeley Mono Variable"
 # font-family = "Jetbrains Mono Nerd Font Mono"
 font-family = "Berkeley Mono Variable"
@@ -7,7 +7,7 @@ font-family = "Berkeley Mono Variable"
 font-variation = "wght=100"
 font-variation-bold = "wght=500"
 font-variation-italic = "wght=300"
-font-thicken = false
+font-thicken = true
 font-thicken-strength = 127
 
 background-opacity = 0.8
@@ -29,4 +29,3 @@ cursor-invert-fg-bg
 # custom-shader = ./ghostty-shaders/bloom.glsl
 # custom-shader = ./ghostty-shaders/inside-the-matrix.glsl
 # custom-shader = ./custom_ghostty_shaders/inside-the-matrix-slowed.glsl
-keybind = shift+enter=text:\n

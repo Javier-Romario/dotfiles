@@ -217,6 +217,7 @@ keybinds clear-defaults=true {
 plugins {
     about location="zellij:about"
     compact-bar location="zellij:compact-bar" {
+        tooltip "F1"
         size "\"1\""
     }
     configuration location="zellij:configuration"

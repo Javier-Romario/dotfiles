@@ -191,3 +191,13 @@
 2025/02/02 (10:25:48) | INFO: Logger set to DEBUG
 2025/02/02 (10:32:19) | DEBUG: Writing new config file
 2025/02/02 (10:32:19) | INFO: Quitting! Runtime: 00:11:00
+
+2025/03/09 (20:25:56) | ===> btop++ v.1.4.0
+2025/03/09 (20:25:56) | INFO: Logger set to DEBUG
+2025/03/09 (20:25:56) | DEBUG: Using locale en_GB.UTF-8
+2025/03/09 (20:25:56) | INFO: Running on /dev/ttys008
+2025/03/09 (20:25:56) | DEBUG: get_sensors(): show_coretemp=1 check_temp=1
+2025/03/09 (20:25:56) | DEBUG: checking intel
+2025/03/09 (20:25:56) | DEBUG: no intel sensors found
+2025/03/09 (20:25:56) | DEBUG: Loading theme file: /opt/homebrew/Cellar/btop/1.4.0/share/btop/themes/tokyo-storm.theme
+2025/03/09 (20:26:11) | INFO: Quitting! Runtime: 00:00:15
