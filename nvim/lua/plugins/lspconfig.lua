@@ -107,8 +107,6 @@ return {
       -- print(vue_ls) -- Debug output
       if vue_ls then
           got = vue_ls:get_install_path() .. '/node_modules/@vue/language-server'
-          print('got it', type(got))
-          print('got it', got)
       else
           print("Vue Language Server not found in Mason registry.")
       end
