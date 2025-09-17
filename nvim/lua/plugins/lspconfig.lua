@@ -5,52 +5,155 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       { "antosha417/nvim-lsp-file-operations", config = true },
     },
-    config = function(_, _) -- lazy, opts
-      -- import lspconfig plugin
-      local lspconfig = require("lspconfig")
+    config = function(_, _)
+      local vue_ls_config = {
+        on_init = function(client)
+          client.handlers['tsserver/request'] = function(_, result, context)
+            local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'ts_ls' })
+            local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })
+            local clients = {}
 
-      -- import cmp-nvim-lsp plugin
+            vim.list_extend(clients, ts_clients)
+            vim.list_extend(clients, vtsls_clients)
+
+            if #clients == 0 then
+              vim.notify('Could not find `vtsls` or `ts_ls` lsp client, `vue_ls` would not work without it.', vim.log.levels.ERROR)
+              return
+            end
+            local ts_client = clients[1]
+
+            local param = unpack(result)
+            local id, command, payload = unpack(param)
+            ts_client:exec_cmd({
+              title = 'vue_request_forward', -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+              command = 'typescript.tsserverRequest',
+              arguments = {
+                command,
+                payload,
+              },
+            }, { bufnr = context.bufnr }, function(_, r)
+              local response = r and r.body
+              -- TODO: handle error or response nil here, e.g. logging
+              -- NOTE: Do NOT return if there's an error or no response, just return nil back to the vue_ls to prevent memory leak
+              local response_data = { { id, response } }
+
+              ---@diagnostic disable-next-line: param-type-mismatch
+              client:notify('tsserver/response', response_data)
+            end)
+          end
+        end,
+      }
+      local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+      local vue_plugin = {
+        name = '@vue/typescript-plugin',
+        location = vue_language_server_path,
+        languages = { 'vue' },
+        configNamespace = 'typescript',
+      }
+      local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+      local vtsls_config = {
+        settings = {
+          vtsls = {
+            tsserver = {
+              globalPlugins = {
+                vue_plugin,
+              },
+            },
+          },
+        },
+        filetypes = tsserver_filetypes,
+      }
+      local ts_ls_config = {
+        init_options = {
+          plugins = {
+            vue_plugin,
+          },
+        },
+        filetypes = tsserver_filetypes,
+      }
+
+
+      -- ===============================================
+      -- 🛠️  BASIC SETUP
+      -- ===============================================
+      local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-      local opts = { noremap = true, silent = true }
-
-      local keymap = vim.keymap -- for conciseness
-
-      local on_attach = function(_, bufnr) -- client, bufnr
-        opts.buffer = bufnr
-        -- set keybinds
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts) -- show definition, references
-
-        opts.desc = "Go to declaration"
-        keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()", opts) -- go to declaration
-
-        opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementations()<CR>", opts) -- show lsp implementations
-        --
-        opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>lua vim.lsp.lsp_type_definitions()<CR>", opts) -- show lsp type definitions
-        --
-        -- opts.desc = "Show buffer diagnostics"
-        -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
-
-        opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-        opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-      end
-
-      -- used to enable autocompletion (assign to every lsp server config)
+      -- Enhanced capabilities for autocompletion
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
-      lspconfig["html"].setup({
+      -- ===============================================
+      -- ⌨️  KEYBIND CONFIGURATION
+      -- ===============================================
+      local keymap = vim.keymap
+      local opts = { noremap = true, silent = true }
+
+      local on_attach = function(client, bufnr)
+        opts.buffer = bufnr
+
+        -- Navigation keybinds
+        opts.desc = "Show LSP references"
+        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+
+        opts.desc = "Go to declaration" 
+        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+        opts.desc = "Go to definitions"
+        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+
+        opts.desc = "Show LSP implementations"
+        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+
+        opts.desc = "Show LSP type definitions"
+        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+
+        -- Actions keybinds
+        opts.desc = "Show available code actions"
+        keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+        opts.desc = "Smart rename"
+        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        opts.desc = "Show buffer diagnostics"
+        keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+
+        opts.desc = "Show line diagnostics"
+        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+        opts.desc = "Go to previous diagnostic"
+        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        opts.desc = "Go to next diagnostic"
+        keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        opts.desc = "Show documentation for what's under cursor"
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        opts.desc = "Restart LSP"
+        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+      end
+
+      -- ===============================================
+      -- 🎨 HTML & CSS SERVERS
+      -- ===============================================
+      lspconfig.html.setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
-      -- configure golang server
-      lspconfig["gopls"].setup({
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      lspconfig.emmet_ls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+          "vue", "html", "typescriptreact", "javascriptreact",
+          "css", "sass", "scss", "less", "svelte"
+        },
+      })
+
+      -- ===============================================
+      -- 🐹 GO LANGUAGE SERVER
+      -- ===============================================
+      lspconfig.gopls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "gopls" },
@@ -66,31 +169,20 @@ return {
         },
       })
 
-      -- configure css server
-      lspconfig["cssls"].setup({
+      -- ===============================================
+      -- 🌙 LUA LANGUAGE SERVER  
+      -- ===============================================
+      lspconfig.lua_ls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
-      })
-
-      -- configure emmet language server
-      lspconfig["emmet_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "vue", "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-      })
-
-      -- configure lua server (with special settings)
-      lspconfig["lua_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        settings = { -- custom settings for lua
+        settings = {
           Lua = {
-            -- make the language server recognize "vim" global
+            -- Make the language server recognize "vim" global
             diagnostics = {
               globals = { "vim" },
             },
             workspace = {
-              -- make language server aware of runtime files
+              -- Make language server aware of runtime files
               library = {
                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                 [vim.fn.stdpath("config") .. "/lua"] = true,
@@ -100,84 +192,138 @@ return {
         },
       })
 
-      local mason_registry = require('mason-registry')
-      local vue_ls = mason_registry.get_package('vue-language-server')
-      local got
-      -- vim.inspect(mason_registry)
-      -- print(vue_ls) -- Debug output
-      if vue_ls then
-          got = vue_ls:get_install_path() .. '/node_modules/@vue/language-server'
-      else
-          print("Vue Language Server not found in Mason registry.")
-      end
-
-      lspconfig.ts_ls.setup {
-        -- Initial options for the TypeScript language server
-        init_options = {
-          plugins = {
-            {
-              -- Name of the TypeScript plugin for Vue
-              name = '@vue/typescript-plugin',
-              location = got,
-              -- location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-              languages = { 'vue' },
-            }
+      -- ===============================================
+      -- ⚡ VTSLS - FASTEST TYPESCRIPT SERVER! 
+      -- ===============================================
+      lspconfig.vtsls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+          "typescript",
+          "javascript",
+          "javascriptreact",
+          "typescriptreact",
+          "vue" -- 🔥 KEY: Add Vue support here!
+        },
+        settings = {
+          vtsls = {
+            -- 🚀 Performance optimizations
+            experimental = {
+              completion = {
+                enableServerSideFuzzyMatch = true,
+              },
+            },
+            -- 🎯 TypeScript settings
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+            -- 🎯 JavaScript settings  
+            javascript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+            },
           },
         },
+      })
 
-        -- Specify the file types that will trigger the TypeScript language server
-        filetypes = {
-          'typescript',          -- TypeScript files (.ts)
-          'javascript',          -- JavaScript files (.js)
-          'javascriptreact',     -- React files with JavaScript (.jsx)
-          'typescriptreact',     -- React files with TypeScript (.tsx)
-          'vue'                  -- Vue.js single-file components (.vue)
-        },
-      }
+      -- ===============================================
+      -- 💚 VUE LANGUAGE SERVER (VOLAR) - HYBRID MODE!
+      -- ===============================================
+      lspconfig.volar.setup({
+        capabilities = capabilities,
+        on_attach = function(client, bufnr)
+          -- 🔥 IMPORTANT: Disable volar's TypeScript to let vtsls handle it
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
 
-      lspconfig.volar.setup {
+          -- Use the standard on_attach for keybinds
+          on_attach(client, bufnr)
+        end,
+        filetypes = { "vue" },
         init_options = {
           vue = {
+            -- 🚀 KEY: Enable hybrid mode - let vtsls handle TS/JS
             hybridMode = true,
           },
         },
         settings = {
-          -- typescript = {
-          --   inlayHints = {
-          --     enumMemberValues = {
-          --       enabled = true,
-          --     },
-          --     functionLikeReturnTypes = {
-          --       enabled = true,
-          --     },
-          --     propertyDeclarationTypes = {
-          --       enabled = true,
-          --     },
-          --     parameterTypes = {
-          --       enabled = true,
-          --       suppressWhenArgumentMatchesName = true,
-          --     },
-          --     variableTypes = {
-          --       enabled = true,
-          --     },
-          --   },
-          -- },
+          vue = {
+            server = {
+              maxProjectRootDistance = 30,
+            },
+          },
         },
-        -- cmd = {
-        --   "npm",
-        --   "vue-language-server",
-        --   "--stdio",
-        -- },
-      }
+      })
 
-      lspconfig.eslint.setup {}
-      lspconfig.biome.setup {}
+      -- ===============================================
+      -- 🔍 LINTING & FORMATTING
+      -- ===============================================
+      lspconfig.eslint.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+          "javascript",
+          "javascriptreact", 
+          "typescript",
+          "typescriptreact",
+          "vue"
+        },
+      })
 
-      -- lspconfig.rustowl.setup {
-      --   trigger = {
-      --     hover = false,
-      --   },
-      -- }
+      lspconfig.biome.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      -- ===============================================
+      -- 🎯 DIAGNOSTIC CONFIGURATION
+      -- ===============================================
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = "●", -- Could be '■', '▎', 'x', '●'
+        },
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = true,
+        float = {
+          border = "rounded",
+          source = true,
+          header = "",
+          prefix = "",
+        },
+      })
+      -- nvim below 0.11
+      local lspconfig = require('lspconfig')
+
+      -- If using ts_ls
+      lspconfig.ts_ls.setup(ts_ls_config)
+      lspconfig.vue_ls.setup(vue_ls_config)
+
+      -- nvim 0.11 or above
+      vim.lsp.config('vtsls', vtsls_config)
+      vim.lsp.config('vue_ls', vue_ls_config)
+      vim.lsp.config('ts_ls', ts_ls_config)
+      vim.lsp.enable({'vtsls', 'vue_ls'}) -- If using `ts_ls` replace `vtsls` to `ts_ls`
+
+
+
     end,
   },
 }
+
+
+

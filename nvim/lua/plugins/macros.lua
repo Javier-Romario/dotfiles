@@ -17,6 +17,7 @@ return {
   -- lazy.nvim
   {
     "chrisgrieser/nvim-recorder",
+    enabled = false,
     dependencies = "rcarriga/nvim-notify", -- optional
     opts = {
       mapping = {
